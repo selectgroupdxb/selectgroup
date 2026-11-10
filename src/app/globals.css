@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — Select Group Brand Guidelines p.11. HEX is authoritative. */
+  --color-sg-black: #222222;
+  --color-sg-pacific: #0097d4;
+  --color-sg-bluish: #2178af;
+  --color-sg-denim: #376093;
+  --color-sg-navy: #284e83;
+  --color-sg-cobalt: #284178;
+  --color-sg-grey-1: #4b4b4b;
+  --color-sg-grey-2: #8a8c8e;
+  --color-sg-grey-3: #bcbec0;
+  --color-sg-grey-4: #d5d7d8;
+  --color-sg-grey-5: #e6e7e8;
+  --color-sg-white: #ffffff;
+  --color-sg-tint-1: #f4f5f6;
+  --color-sg-tint-2: #f7f7f8;
+
+  /* Fonts. Display: Sansumi (licensed, supplied), Wix Madefor Display fallback.
+     Body: Roboto (Avenir substitute — not yet licensed). */
+  --font-display: var(--font-sansumi), var(--font-wix-madefor-display), "Helvetica Neue", Helvetica, sans-serif;
+  --font-body: var(--font-roboto), "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Type scale "as built" (handoff README) — supersedes the generic design-system defaults for this site. */
+  --text-h1: 56px;
+  --text-h1--line-height: 1.08;
+  --text-h2: 38px;
+  --text-h2--line-height: 1.14;
+  --text-h3: 26px;
+  --text-h3--line-height: 1.2;
+  --text-h4: 20px;
+  --text-h4--line-height: 1.4;
+  --text-card-title: 15px;
+  --text-card-title--line-height: 1.3;
+  --text-stat: 80px;
+  --text-stat--line-height: 1;
+  --text-stat-unit: 20px;
+  --text-stat-unit--line-height: 1.3;
+  --text-eyebrow: 12px;
+  --text-eyebrow--line-height: 1.3;
+  --text-meta: 11px;
+  --text-meta--line-height: 1.3;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.75;
+  --text-body: 16px;
+  --text-body--line-height: 1.7;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.7;
+  --text-button: 12px;
+  --text-button--line-height: 1;
+  --text-chip: 10px;
+  --text-chip--line-height: 1;
+
+  /* Tracking — the wide-tracked uppercase display line is the brand's core typographic move. */
+  --tracking-display: 0.06em;
+  --tracking-heading: 0.08em;
+  --tracking-eyebrow: 0.22em;
+  --tracking-button: 0.14em;
+  --tracking-chip: 0.16em;
+  --tracking-lockup: 0.34em;
+
+  /* Shape — square by default; radius is opt-in, pills reserved for buttons/chips. */
+  --radius-xs: 4px;
+  --radius-pill: 999px;
+
+  /* Shadow — hairlines carry most separation; shadow is sparing. */
+  --shadow-card: 0 2px 12px rgba(34, 34, 34, 0.08);
+  --shadow-card-hover: 0 12px 32px rgba(34, 34, 34, 0.14);
+  --shadow-modal: 0 24px 64px rgba(34, 34, 34, 0.24);
+  --shadow-nav: 0 1px 0 rgba(34, 34, 34, 0.08);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-reveal: cubic-bezier(0.16, 0.84, 0.44, 1);
+
+  /* Breakpoints match the handoff's own responsive spec (tablet 768, desktop 1200). */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
+}
+
+:root {
+  --nav-height: 88px;
+  --nav-height-mobile: 64px;
+  --page-max: 1320px;
+  --gutter: 64px;
+  --gutter-tablet: 40px;
+  --gutter-mobile: 20px;
+
+  /* Scrims — required whenever type sits over an image; never unscrimmed photography. */
+  --scrim-hero: linear-gradient(to bottom, rgba(34, 34, 34, 0.34) 0%, rgba(34, 34, 34, 0.16) 42%, rgba(34, 34, 34, 0.74) 100%);
+  --scrim-card: linear-gradient(to top, rgba(34, 34, 34, 0.96) 0%, rgba(34, 34, 34, 0.78) 34%, rgba(34, 34, 34, 0.5) 70%, rgba(34, 34, 34, 0.34) 100%);
+  --scrim-stats: linear-gradient(to bottom, rgba(34, 34, 34, 0.74) 0%, rgba(34, 34, 34, 0.82) 100%);
+  --scrim-carousel: linear-gradient(105deg, rgba(34, 34, 34, 0.96) 0%, rgba(34, 34, 34, 0.78) 40%, rgba(34, 34, 34, 0.5) 72%, rgba(34, 34, 34, 0.34) 100%);
+  --focus-ring: 0 0 0 2px #fff, 0 0 0 4px var(--color-sg-pacific);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-sg-grey-4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-sg-white);
+    color: var(--color-sg-grey-1);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-sg-black);
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-heading);
+  }
+
+  a {
+    color: var(--color-sg-cobalt);
+    transition: color 180ms var(--ease-standard);
+  }
+
+  a:hover {
+    color: var(--color-sg-pacific);
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+@keyframes sg-slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes sg-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sg-scroll-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sg-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
