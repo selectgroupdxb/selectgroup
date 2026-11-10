@@ -64,7 +64,13 @@ export function PastDevelopments() {
               className="group relative h-[320px] w-[240px] shrink-0 overflow-hidden md:h-[360px] md:w-[300px]"
               style={{ scrollSnapAlign: "start" }}
             >
-              <ImagePlaceholder label={`${item.name}, ${item.displayYear}`} className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]" />
+              <ImagePlaceholder
+                label={`${item.name}, ${item.displayYear}`}
+                src={item.image}
+                alt={`${item.name}, ${item.displayYear}`}
+                sizes="(min-width: 768px) 300px, 240px"
+                className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
+              />
               <div
                 className="absolute inset-0"
                 style={{ background: "linear-gradient(to top, rgba(34,34,34,.88) 0%, rgba(34,34,34,0) 60%)" }}

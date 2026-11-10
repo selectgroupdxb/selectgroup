@@ -28,7 +28,13 @@ function DevelopmentCard({ item, feature }: { item: Development; feature: boolea
       href={`/developments/${item.slug}`}
       className={cn("group relative block min-h-[360px] overflow-hidden", feature && "md:col-span-2 md:row-span-2")}
     >
-      <ImagePlaceholder label={item.name} className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]" />
+      <ImagePlaceholder
+        label={item.name}
+        src={item.image}
+        alt={item.name}
+        sizes={feature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+        className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
+      />
       <div
         className="absolute inset-0 transition-opacity duration-320 group-hover:opacity-90"
         style={{ background: "var(--scrim-card)" }}

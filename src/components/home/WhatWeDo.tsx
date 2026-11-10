@@ -31,6 +31,9 @@ export function WhatWeDo() {
             >
               <ImagePlaceholder
                 label={vertical.title}
+                src={vertical.image}
+                alt={vertical.title}
+                sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
                 className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
               />
               <div

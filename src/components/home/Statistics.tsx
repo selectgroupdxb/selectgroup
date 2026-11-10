@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { statisticsBackgroundImage } from "@/data/homepage";
 
 const STATS = [
   { value: "24.7M", unit: "Sq.Ft.", label: "Properties Developed" },
@@ -13,7 +14,13 @@ const STATS = [
 export function Statistics() {
   return (
     <Section tone="black" padding="stats" className="relative overflow-hidden" fullBleed>
-      <ImagePlaceholder label="Statistics background" className="absolute inset-0" />
+      <ImagePlaceholder
+        label="Statistics background"
+        src={statisticsBackgroundImage}
+        alt=""
+        sizes="100vw"
+        className="absolute inset-0"
+      />
       <div className="absolute inset-0" style={{ background: "var(--scrim-stats)" }} aria-hidden />
       <div className="relative mx-auto max-w-[var(--page-max)] px-5 md:px-10 desktop:px-16">
         <Eyebrow tone="inverse" className="mb-16 text-center">

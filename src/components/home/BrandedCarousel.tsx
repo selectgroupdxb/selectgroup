@@ -85,7 +85,13 @@ export function BrandedCarousel() {
               key={slide.name}
               className="relative h-[560px] w-[min(1000px,calc(100vw-40px))] shrink-0 snap-start overflow-hidden desktop:h-[580px] desktop:w-[1000px]"
             >
-              <ImagePlaceholder label={slide.name} className="absolute inset-0 transition-transform duration-600 hover:scale-[1.03]" />
+              <ImagePlaceholder
+                label={slide.name}
+                src={slide.image}
+                alt={slide.name}
+                sizes="(min-width: 1200px) 1000px, 100vw"
+                className="absolute inset-0 transition-transform duration-600 hover:scale-[1.03]"
+              />
               <div className="absolute inset-0" style={{ background: "var(--scrim-carousel)" }} aria-hidden />
               <div className="absolute top-8 left-8 flex h-18 w-18 items-center justify-center bg-white/90 text-meta font-bold tracking-chip text-sg-black uppercase">
                 {slide.partner}

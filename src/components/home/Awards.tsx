@@ -7,7 +7,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { awards } from "@/data/homepage";
+import { awards, awardsBackgroundImage } from "@/data/homepage";
 
 const HOMEPAGE_AWARDS = awards.slice(0, 5);
 
@@ -16,7 +16,13 @@ export function Awards() {
 
   return (
     <Section tone="black" padding="standard" className="relative my-16 overflow-hidden" fullBleed>
-      <ImagePlaceholder label="Awards background" className="absolute inset-0" />
+      <ImagePlaceholder
+        label="Awards background"
+        src={awardsBackgroundImage}
+        alt=""
+        sizes="100vw"
+        className="absolute inset-0"
+      />
       <div className="absolute inset-0 bg-sg-black/88" aria-hidden />
       <div className="relative mx-auto grid max-w-[var(--page-max)] gap-10 px-5 md:px-10 desktop:grid-cols-2 desktop:gap-16 desktop:px-16">
         <Reveal className="flex flex-col gap-5">
@@ -25,7 +31,14 @@ export function Awards() {
           <p className="max-w-prose text-body-lg font-light text-white/82">
             Recognised across the region for residential, hospitality and branded-residence development.
           </p>
-          <ImagePlaceholder label={`Award photograph — ${hovered.name}`} aspect="3/2" className="mt-4 transition-opacity duration-320" />
+          <ImagePlaceholder
+            label={`Award photograph — ${hovered.name}`}
+            src={hovered.image}
+            alt={hovered.name}
+            aspect="3/2"
+            sizes="(min-width: 1200px) 50vw, 100vw"
+            className="mt-4 transition-opacity duration-320"
+          />
         </Reveal>
 
         <Reveal>

@@ -44,6 +44,10 @@ export function Hero() {
           >
             <ImagePlaceholder
               label={isBrand ? "Hero — Peninsula, brand slide" : `Hero — ${slide.name}`}
+              src={slide.image}
+              alt={slide.title}
+              priority={i === 0}
+              sizes="100vw"
               className="absolute inset-0 motion-safe:animate-[sg-slow-zoom_24s_ease-in-out_infinite_alternate]"
             />
             <div className="absolute inset-0" style={{ background: "var(--scrim-hero)" }} />

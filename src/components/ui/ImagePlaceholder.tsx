@@ -1,20 +1,42 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type ImagePlaceholderProps = {
-  /** Describes the real photography this slot will hold once supplied by Select Group. */
+  /** Describes the real photography this slot holds (or will hold). */
   label: string;
   className?: string;
   /** CSS aspect-ratio, e.g. "16/9", "4/5". Omit to fill the parent's height. */
   aspect?: string;
+  /** Real photo path under /public. Omit to render the neutral placeholder. */
+  src?: string;
+  /** Required alongside `src` — falls back to `label` if omitted. */
+  alt?: string;
+  sizes?: string;
+  priority?: boolean;
 };
 
 /**
- * Neutral stand-in for real photography. The handoff's supplied prototype images
- * are provisional and explicitly not to ship even as placeholders — this renders
- * a plain tinted field with a visible caption instead, so every empty slot is
- * obvious rather than looking content-complete.
+ * Renders real photography when `src` is supplied, otherwise a neutral
+ * stand-in with a visible caption — so every slot still without a photo is
+ * obvious rather than looking content-complete. Same component either way
+ * so call sites don't need to branch themselves as photos land.
  */
-export function ImagePlaceholder({ label, className, aspect }: ImagePlaceholderProps) {
+export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, priority }: ImagePlaceholderProps) {
+  if (src) {
+    return (
+      <div className={cn("relative h-full w-full overflow-hidden bg-sg-grey-5", className)} style={aspect ? { aspectRatio: aspect } : undefined}>
+        <Image
+          src={src}
+          alt={alt ?? label}
+          fill
+          sizes={sizes ?? "100vw"}
+          priority={priority}
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       role="img"

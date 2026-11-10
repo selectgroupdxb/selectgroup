@@ -19,7 +19,13 @@ export function SelectDifference() {
       <Reveal className="grid grid-cols-1 gap-5 md:grid-cols-2 desktop:grid-cols-4">
         {principles.map((principle) => (
           <div key={principle.num} className="group relative h-[440px] overflow-hidden desktop:h-[520px]">
-            <ImagePlaceholder label={principle.title} className="absolute inset-0" />
+            <ImagePlaceholder
+              label={principle.title}
+              src={principle.image}
+              alt={principle.title}
+              sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
+              className="absolute inset-0"
+            />
             <div className="absolute inset-0" style={{ background: "var(--scrim-card)" }} aria-hidden />
             <div className="absolute inset-0 flex flex-col justify-end p-6">
               <span className="font-display text-h3 text-white/60">{principle.num}</span>
