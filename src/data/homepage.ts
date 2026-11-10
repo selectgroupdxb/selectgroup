@@ -312,7 +312,10 @@ export const awards: Award[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// 9. Latest News
+// 9. Press coverage (third-party press mentions — NOT used by the homepage's
+// "Latest News" section, which pulls from ./insights.ts instead; see that
+// file's header for why). Reserved as seed data for the future /media
+// ("Press") page.
 // Lead story: Select Group Homepage.dc.html ~L664-675 (hard-coded in the
 // template, not array-driven). Grid cards: ~L4868-4877 (`const news = [...]`).
 // ---------------------------------------------------------------------------

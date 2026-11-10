@@ -19,11 +19,11 @@ type ButtonAsButton = CommonProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-pill text-button font-bold tracking-button uppercase transition-colors duration-180 [transition-timing-function:var(--ease-standard)] focus-visible:outline-none";
+  "inline-flex items-center justify-center gap-2 rounded-pill text-button font-bold tracking-button uppercase whitespace-nowrap transition-colors duration-180 [transition-timing-function:var(--ease-standard)] focus-visible:outline-none";
 
 const sizeClass: Record<NonNullable<CommonProps["size"]>, string> = {
   default: "h-12 px-8",
-  compact: "h-10 px-6",
+  compact: "h-10 px-5",
 };
 
 const variantClass: Record<NonNullable<CommonProps["variant"]>, string> = {

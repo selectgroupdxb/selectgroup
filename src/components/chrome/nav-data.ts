@@ -41,7 +41,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     key: "about",
-    label: "About Select Group",
+    label: "About Us",
     href: "/about",
     intro: "Developing premium real estate since 2002.",
     links: [
@@ -65,4 +65,7 @@ export const navGroups: NavGroup[] = [
   },
 ];
 
-export const utilityLinks: NavLink[] = [{ label: "Contact", href: "/contact" }];
+export const utilityLinks: NavLink[] = [
+  { label: "Press", href: "/media" },
+  { label: "Contact", href: "/contact" },
+];

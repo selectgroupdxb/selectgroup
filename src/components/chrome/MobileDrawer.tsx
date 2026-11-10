@@ -20,7 +20,10 @@ export function MobileDrawer({ open, onClose }: MobileDrawerProps) {
       aria-modal="true"
       aria-label="Site menu"
       className={cn(
-        "fixed inset-0 z-[60] flex flex-col bg-white transition-opacity duration-320 desktop:hidden",
+        // Opened from the persistent menu icon at every breakpoint, not just
+        // mobile — matches the live site's nav, which keeps a secondary
+        // full-menu icon even at desktop widths alongside the mega-panels.
+        "fixed inset-0 z-[60] flex flex-col bg-white transition-opacity duration-320",
         open ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >
