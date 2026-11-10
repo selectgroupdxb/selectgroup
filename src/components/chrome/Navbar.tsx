@@ -77,7 +77,7 @@ export function Navbar() {
         )}
       >
         <div className="relative mx-auto flex h-full max-w-[var(--page-max)] items-center justify-between px-5 md:px-10 desktop:px-16">
-          <Logo variant={solid ? "colour" : "white"} heightClass="h-7 desktop:h-9" />
+          <Logo variant={solid ? "colour" : "white"} heightClass="h-10 desktop:h-[65px]" />
 
           <nav className="hidden items-center desktop:flex" aria-label="Primary">
             {navGroups.map((group) => {
