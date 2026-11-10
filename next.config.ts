@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { cspHeaderValue } from "./src/lib/csp";
 
 const nextConfig: NextConfig = {
   // Cache Components / Partial Prefetching are left off for now — phase 1 is
@@ -6,6 +7,14 @@ const nextConfig: NextConfig = {
   // queries land and a deliberate caching strategy is designed around them.
   images: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [{ key: "Content-Security-Policy", value: cspHeaderValue }],
+      },
+    ];
   },
   turbopack: {
     rules: {
