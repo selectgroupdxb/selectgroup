@@ -24,7 +24,6 @@ export const navGroups: NavGroup[] = [
       { label: "Off Plan", href: "/developments?status=offplan" },
       { label: "Completed", href: "/developments?status=completed" },
       { label: "Branded Residences", href: "/developments?status=branded" },
-      { label: "Area Guides", href: "/areas" },
     ],
   },
   {
@@ -58,7 +57,7 @@ export const navGroups: NavGroup[] = [
     intro: "Market reports, area guides and insight for buyers and investors.",
     links: [
       { label: "Insights", href: "/insights" },
-      { label: "Media", href: "/media" },
+      { label: "Area Guides", href: "/areas" },
       { label: "Reports", href: "/reports" },
       { label: "Case Studies", href: "/case-studies" },
     ],
