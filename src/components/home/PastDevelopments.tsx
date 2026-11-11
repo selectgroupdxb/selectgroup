@@ -18,8 +18,8 @@ export function PastDevelopments() {
   }
 
   return (
-    <section className="border-t border-sg-grey-5 bg-white pt-14 pb-14 md:pb-20 desktop:pb-24">
-      <div className="mx-auto flex max-w-[var(--page-max)] flex-col gap-5 px-5 md:flex-row md:items-end md:justify-between md:px-10 desktop:px-16">
+    <section className="border-t border-sg-grey-5 bg-white pt-14 pb-14 tablet:pb-20 desktop:pb-24">
+      <div className="mx-auto flex max-w-[var(--page-max)] flex-col gap-5 px-5 tablet:flex-row tablet:items-end tablet:justify-between tablet:px-10 desktop:px-16">
         <div className="flex flex-col gap-3">
           <Eyebrow>Past Developments</Eyebrow>
           <h2 className="text-h2 text-sg-black">Delivered across Dubai since 2007</h2>
@@ -28,7 +28,7 @@ export function PastDevelopments() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden gap-2 md:flex">
+          <div className="hidden gap-2 tablet:flex">
             <button
               type="button"
               onClick={() => scrollByAmount(-1)}
@@ -46,7 +46,7 @@ export function PastDevelopments() {
               <ChevronRight size={18} strokeWidth={1.5} />
             </button>
           </div>
-          <Button href="/journey" variant="filled" className="w-full md:w-auto">
+          <Button href="/journey" variant="filled" className="w-full tablet:w-auto">
             View Our Journey
           </Button>
         </div>
@@ -55,13 +55,13 @@ export function PastDevelopments() {
       <Reveal>
         <div
           ref={scrollerRef}
-          className="mt-8 flex gap-6 overflow-x-auto px-5 [scrollbar-width:none] md:px-10 desktop:px-16"
+          className="mt-8 flex gap-6 overflow-x-auto px-5 [scrollbar-width:none] tablet:px-10 desktop:px-16"
           style={{ scrollSnapType: "x mandatory" }}
         >
           {pastDevelopments.map((item) => (
             <div
               key={item.name}
-              className="group relative h-[320px] w-[240px] shrink-0 overflow-hidden md:h-[360px] md:w-[300px]"
+              className="group relative h-[320px] w-[240px] shrink-0 overflow-hidden tablet:h-[360px] tablet:w-[300px]"
               style={{ scrollSnapAlign: "start" }}
             >
               <ImagePlaceholder
@@ -86,7 +86,7 @@ export function PastDevelopments() {
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-10 grid max-w-[var(--page-max)] grid-cols-2 gap-6 border-t border-sg-grey-5 px-5 pt-8 md:grid-cols-4 md:px-10 desktop:px-16">
+      <div className="mx-auto mt-10 grid max-w-[var(--page-max)] grid-cols-2 gap-6 border-t border-sg-grey-5 px-5 pt-8 tablet:grid-cols-4 tablet:px-10 desktop:px-16">
         {pastDevelopmentsStats.map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1">
             <span className="font-display text-h3 text-sg-black">{stat.value}</span>

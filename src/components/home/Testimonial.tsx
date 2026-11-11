@@ -50,7 +50,7 @@ export function Testimonial() {
         </div>
         <h2 className="mt-6 text-h2 text-sg-black">What Our Customers Say</h2>
 
-        <div className="mt-10 flex w-full max-w-[760px] items-center gap-4 md:gap-8">
+        <div className="mt-10 flex w-full max-w-[760px] items-center gap-4 tablet:gap-8">
           <button
             type="button"
             onClick={() => setIndex((i) => (i - 1 + count) % count)}
@@ -70,7 +70,7 @@ export function Testimonial() {
                 )}
                 aria-hidden={i !== index}
               >
-                <p className="w-full min-w-0 max-w-[40ch] font-body text-[22px] leading-[1.3] font-light text-sg-black md:text-[36px]">
+                <p className="w-full min-w-0 max-w-[40ch] font-body text-[22px] leading-[1.3] font-light text-sg-black tablet:text-[36px]">
                   &ldquo;{t.text}&rdquo;
                 </p>
                 <p className="mt-4 text-body-sm font-bold text-sg-black">{t.name}</p>

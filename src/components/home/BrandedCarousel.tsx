@@ -44,7 +44,7 @@ export function BrandedCarousel() {
 
   return (
     <Section tone="black" padding="none" className="pt-32 pb-26" fullBleed>
-      <div className="mx-auto mb-10 flex max-w-[var(--page-max)] flex-col gap-5 px-5 md:px-10 md:flex-row md:items-end md:justify-between desktop:px-16">
+      <div className="mx-auto mb-10 flex max-w-[var(--page-max)] flex-col gap-5 px-5 tablet:px-10 tablet:flex-row tablet:items-end tablet:justify-between desktop:px-16">
         <div className="flex flex-col gap-3">
           <Eyebrow tone="inverse">In Partnership With</Eyebrow>
           <h2 className="max-w-[22ch] text-h2 text-white">
@@ -78,7 +78,7 @@ export function BrandedCarousel() {
         <div
           ref={scrollerRef}
           onScroll={handleScroll}
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto pl-5 [scrollbar-width:none] md:pl-10 desktop:pl-16"
+          className="flex snap-x snap-mandatory gap-6 overflow-x-auto pl-5 [scrollbar-width:none] tablet:pl-10 desktop:pl-16"
         >
           {brandedCarousel.map((slide) => (
             <div
@@ -109,7 +109,7 @@ export function BrandedCarousel() {
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-10 flex max-w-[var(--page-max)] flex-col gap-6 px-5 md:flex-row md:items-center md:justify-between md:px-10 desktop:px-16">
+      <div className="mx-auto mt-10 flex max-w-[var(--page-max)] flex-col gap-6 px-5 tablet:flex-row tablet:items-center tablet:justify-between tablet:px-10 desktop:px-16">
         <div className="flex flex-1 items-center gap-4">
           <div className="h-px flex-1 bg-white/24">
             <div

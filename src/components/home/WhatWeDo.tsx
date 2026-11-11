@@ -22,7 +22,7 @@ export function WhatWeDo() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 desktop:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 tablet:grid-cols-2 desktop:grid-cols-4">
           {verticals.map((vertical) => (
             <Link
               key={vertical.title}

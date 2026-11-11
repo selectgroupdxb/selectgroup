@@ -121,7 +121,7 @@ export function HeroSearch({ onPointerHold, onInteract }: HeroSearchProps) {
       <p className="mb-4 text-center font-display text-[30px] tracking-display text-white uppercase">
         Find your development
       </p>
-      <div className="flex flex-col gap-2 bg-white p-2 shadow-modal md:flex-row md:items-stretch md:gap-0 md:rounded-pill md:p-2">
+      <div className="flex flex-col gap-2 bg-white p-2 shadow-modal tablet:flex-row tablet:items-stretch tablet:gap-0 tablet:rounded-pill tablet:p-2">
         <div className="relative flex-1">
           <button type="button" onClick={() => toggle("type")} className={triggerClass(open === "type", developments.length)}>
             {developments.length ? `Development (${developments.length})` : "Development"}
@@ -139,7 +139,7 @@ export function HeroSearch({ onPointerHold, onInteract }: HeroSearchProps) {
           </Popover>
         </div>
 
-        <div className="hidden w-px bg-sg-grey-4 md:block" aria-hidden />
+        <div className="hidden w-px bg-sg-grey-4 tablet:block" aria-hidden />
 
         <div className="relative flex-1">
           <button type="button" onClick={() => toggle("beds")} className={triggerClass(open === "beds", bedrooms.length)}>
@@ -158,7 +158,7 @@ export function HeroSearch({ onPointerHold, onInteract }: HeroSearchProps) {
           </Popover>
         </div>
 
-        <div className="hidden w-px bg-sg-grey-4 md:block" aria-hidden />
+        <div className="hidden w-px bg-sg-grey-4 tablet:block" aria-hidden />
 
         <div className="relative flex-1">
           <button type="button" onClick={() => toggle("price")} className={triggerClass(open === "price", min || max ? 1 : 0)}>
@@ -201,7 +201,7 @@ export function HeroSearch({ onPointerHold, onInteract }: HeroSearchProps) {
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex h-12 items-center justify-center bg-sg-pacific px-8 text-button font-bold tracking-button text-white uppercase transition-colors duration-180 hover:bg-sg-bluish active:bg-sg-navy md:rounded-pill"
+          className="flex h-12 items-center justify-center bg-sg-pacific px-8 text-button font-bold tracking-button text-white uppercase transition-colors duration-180 hover:bg-sg-bluish active:bg-sg-navy tablet:rounded-pill"
         >
           Search Properties
         </button>

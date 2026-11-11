@@ -22,13 +22,17 @@ export function Statistics() {
         className="absolute inset-0"
       />
       <div className="absolute inset-0" style={{ background: "var(--scrim-stats)" }} aria-hidden />
-      <div className="relative mx-auto max-w-[var(--page-max)] px-5 md:px-10 desktop:px-16">
+      <div className="relative mx-auto max-w-[var(--page-max)] px-5 tablet:px-10 desktop:px-16">
         <Eyebrow tone="inverse" className="mb-16 text-center">
           Developing Premium Real Estate Since 2002
         </Eyebrow>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 desktop:grid-cols-4 desktop:gap-0 desktop:divide-x desktop:divide-white/28">
-          {STATS.map((stat) => (
-            <StatBlock key={stat.label} {...stat} />
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 desktop:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] desktop:gap-x-0">
+          {STATS.map((stat, i) => (
+            <StatBlock
+              key={stat.label}
+              {...stat}
+              className={i > 0 ? "desktop:border-l desktop:border-white/28 desktop:px-6" : "desktop:px-6"}
+            />
           ))}
         </div>
       </div>

@@ -7,7 +7,7 @@ import { principles } from "@/data/homepage";
 export function SelectDifference() {
   return (
     <Section id="select-difference" tone="white" padding="standard">
-      <Reveal className="mb-10 flex flex-col items-start gap-3 md:mb-14">
+      <Reveal className="mb-10 flex flex-col items-start gap-3 tablet:mb-14">
         <Eyebrow>The Select Difference</Eyebrow>
         <h2 className="text-h2 text-sg-black">A more considered way to live</h2>
         <p className="max-w-prose text-body-lg font-light text-sg-grey-1">
@@ -16,7 +16,7 @@ export function SelectDifference() {
         </p>
       </Reveal>
 
-      <Reveal className="grid grid-cols-1 gap-5 md:grid-cols-2 desktop:grid-cols-4">
+      <Reveal className="grid grid-cols-1 gap-5 tablet:grid-cols-2 desktop:grid-cols-4">
         {principles.map((principle) => (
           <div key={principle.num} className="group relative h-[440px] overflow-hidden desktop:h-[520px]">
             <ImagePlaceholder

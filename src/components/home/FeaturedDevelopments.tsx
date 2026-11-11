@@ -11,28 +11,73 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { developments, type Development, type DevelopmentCategory } from "@/data/homepage";
 
-type TabKey = "all" | DevelopmentCategory;
+type TabKey = "featured" | "available" | DevelopmentCategory;
 
 const TABS: { key: TabKey; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "offplan", label: "Off Plan" },
+  { key: "featured", label: "Featured Projects" },
+  { key: "available", label: "Available" },
   { key: "completed", label: "Completed" },
-  { key: "branded", label: "Branded" },
+  { key: "branded", label: "Branded Residences" },
 ];
 
 const ITEMS_PER_PAGE = 4;
 
-function DevelopmentCard({ item, feature }: { item: Development; feature: boolean }) {
+// The signed-off design curates "Available" by hand rather than deriving it
+// from the off-plan filter (which would also surface sold-out-but-tagged
+// items like Nautica) — matched here by name against `developments`.
+const AVAILABLE_NAMES = ["Six Senses Residences Dubai Marina", "Artistry Residences"];
+
+// "Completed" leads with this exact curated set (matching the signed-off
+// page 1) before falling back to the rest of the completed-tagged
+// developments for subsequent pages.
+const COMPLETED_HEAD_NAMES = ["Six Senses Residences The Palm", "Peninsula Four", "The EDGE", "Jumeirah Living Business Bay"];
+
+function byNames(names: string[]) {
+  return names
+    .map((name) => developments.find((d) => d.name === name))
+    .filter((d): d is Development => Boolean(d));
+}
+
+/**
+ * Bento grid — a fixed 6-column / 2-row cell system lifted directly from the
+ * signed-off design file, not a generic "feature + compact tiles" guess.
+ * Column/row spans differ by how many items are actually on the page, so a
+ * 2-item page reads as two equal cards, a 3-item page gives the feature 1/3
+ * width with the other two at 2/3 width stacked beside it, and a 4-item page
+ * adds a third slot plus a wide card underneath.
+ */
+function containerClass(total: number) {
+  if (total <= 1) return "grid-cols-1 auto-rows-[360px] desktop:auto-rows-[540px]";
+  if (total === 2) return "grid-cols-1 tablet:grid-cols-2 auto-rows-[360px] desktop:auto-rows-[540px]";
+  return "grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-6 auto-rows-[360px] desktop:auto-rows-[260px]";
+}
+
+function itemClass(index: number, total: number) {
+  if (total <= 2) return "";
+  if (total === 3) {
+    if (index === 0) return "desktop:[grid-column:1/3] desktop:[grid-row:1/3]";
+    if (index === 1) return "desktop:[grid-column:3/7] desktop:[grid-row:1/2]";
+    return "desktop:[grid-column:3/7] desktop:[grid-row:2/3]";
+  }
+  // total === 4
+  if (index === 0) return "desktop:[grid-column:1/3] desktop:[grid-row:1/3]";
+  if (index === 1) return "desktop:[grid-column:3/5] desktop:[grid-row:1/2]";
+  if (index === 2) return "desktop:[grid-column:5/7] desktop:[grid-row:1/2]";
+  return "desktop:[grid-column:3/7] desktop:[grid-row:2/3]";
+}
+
+function DevelopmentCard({ item, index, total }: { item: Development; index: number; total: number }) {
+  const isFeature = total >= 3 && index === 0;
   return (
     <Link
       href={`/developments/${item.slug}`}
-      className={cn("group relative block min-h-[360px] overflow-hidden", feature && "md:col-span-2 md:row-span-2")}
+      className={cn("group relative block h-full overflow-hidden", itemClass(index, total))}
     >
       <ImagePlaceholder
         label={item.name}
         src={item.image}
         alt={item.name}
-        sizes={feature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+        sizes={isFeature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
         className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
       />
       <div
@@ -65,14 +110,21 @@ function DevelopmentCard({ item, feature }: { item: Development; feature: boolea
 }
 
 export function FeaturedDevelopments() {
-  const [tab, setTab] = useState<TabKey>("all");
+  const [tab, setTab] = useState<TabKey>("featured");
   const [page, setPage] = useState(0);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  const filtered = useMemo(
-    () => (tab === "all" ? developments : developments.filter((d) => d.cats.includes(tab))),
-    [tab],
-  );
+  const filtered = useMemo(() => {
+    if (tab === "featured") return developments.filter((d) => d.featured);
+    if (tab === "available") return byNames(AVAILABLE_NAMES);
+    if (tab === "completed") {
+      const head = byNames(COMPLETED_HEAD_NAMES);
+      const headNames = new Set(head.map((d) => d.name));
+      const rest = developments.filter((d) => d.cats.includes("completed") && !headNames.has(d.name));
+      return [...head, ...rest];
+    }
+    return developments.filter((d) => d.cats.includes(tab));
+  }, [tab]);
 
   const pages = useMemo(() => {
     const chunks: Development[][] = [];
@@ -104,7 +156,7 @@ export function FeaturedDevelopments() {
         />
       </Reveal>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 md:mt-10">
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 tablet:mt-10">
         <div className="flex gap-2 overflow-x-auto" role="tablist" aria-label="Development status">
           {TABS.map((t) => (
             <button
@@ -148,16 +200,13 @@ export function FeaturedDevelopments() {
 
       <Reveal
         as="div"
-        className="mt-6 flex snap-x snap-mandatory overflow-x-auto scroll-smooth md:mt-8 [scrollbar-width:none]"
+        className="mt-6 flex snap-x snap-mandatory overflow-x-auto scroll-smooth tablet:mt-8 [scrollbar-width:none]"
       >
         <div ref={scrollerRef} className="flex w-full">
           {pages.map((pageItems, i) => (
-            <div
-              key={i}
-              className="grid w-full shrink-0 snap-start auto-rows-[360px] grid-cols-1 gap-5 md:grid-cols-2 desktop:grid-cols-4"
-            >
+            <div key={i} className={cn("grid w-full shrink-0 snap-start gap-5", containerClass(pageItems.length))}>
               {pageItems.map((item, itemIndex) => (
-                <DevelopmentCard key={item.slug} item={item} feature={i === 0 && itemIndex === 0} />
+                <DevelopmentCard key={item.slug} item={item} index={itemIndex} total={pageItems.length} />
               ))}
             </div>
           ))}

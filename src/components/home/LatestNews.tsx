@@ -14,8 +14,8 @@ const underline =
 
 export function LatestNews() {
   return (
-    <Section tone="white" padding="none" className="pt-16 pb-18 md:pb-24 desktop:pb-32">
-      <div className="mb-10 flex flex-col gap-5 md:mb-14 md:flex-row md:items-end md:justify-between">
+    <Section tone="white" padding="none" className="pt-16 pb-18 tablet:pb-24 desktop:pb-32">
+      <div className="mb-10 flex flex-col gap-5 tablet:mb-14 tablet:flex-row tablet:items-end tablet:justify-between">
         <div className="flex flex-col gap-3">
           <Eyebrow>Newsroom</Eyebrow>
           <h2 className="text-h2 text-sg-black">Latest News</h2>
@@ -28,7 +28,7 @@ export function LatestNews() {
       <Reveal>
         <Link
           href={`/insights/${leadInsight.slug}`}
-          className="group grid grid-cols-1 gap-6 md:grid-cols-[460px_1fr] md:items-center md:gap-10"
+          className="group grid grid-cols-1 gap-6 tablet:grid-cols-[460px_1fr] tablet:items-center tablet:gap-10"
         >
           <ImagePlaceholder label={leadInsight.title} aspect="4/3" className="transition-transform duration-600 group-hover:scale-[1.04]" />
           <div>
@@ -42,7 +42,7 @@ export function LatestNews() {
         </Link>
       </Reveal>
 
-      <Reveal className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 desktop:mt-16 desktop:grid-cols-4">
+      <Reveal className="mt-12 grid grid-cols-1 gap-8 tablet:grid-cols-2 desktop:mt-16 desktop:grid-cols-4">
         {cardInsights.map((article) => (
           <Link key={article.slug} href={`/insights/${article.slug}`} className="group flex flex-col gap-4">
             <ImagePlaceholder label={article.title} aspect="15/7" className="transition-transform duration-600 group-hover:scale-[1.04]" />

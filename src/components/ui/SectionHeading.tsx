@@ -35,8 +35,8 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "flex flex-col gap-5 md:flex-row md:items-end md:justify-between",
-        align === "center" && "md:flex-col md:items-center md:text-center",
+        "flex flex-col gap-5 tablet:flex-row tablet:items-end tablet:justify-between",
+        align === "center" && "tablet:flex-col tablet:items-center tablet:text-center",
         className,
       )}
     >

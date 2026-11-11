@@ -92,11 +92,11 @@ export function Hero() {
           })}
         </div>
 
-        <div className="shrink-0 px-5 pb-8 md:pb-10 desktop:pb-12">
+        <div className="shrink-0 px-5 pb-8 tablet:pb-10 desktop:pb-12">
           <HeroSearch onPointerHold={setHeld} onInteract={() => setLocked(true)} />
         </div>
 
-        <div className="flex shrink-0 items-center justify-center gap-2 pb-6 md:pb-9" role="tablist" aria-label="Hero slides">
+        <div className="flex shrink-0 items-center justify-center gap-2 pb-6 tablet:pb-9" role="tablist" aria-label="Hero slides">
           {heroSlides.map((slide, i) => (
             <button
               key={slide.title}

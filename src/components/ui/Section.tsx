@@ -21,13 +21,13 @@ const toneClass: Record<NonNullable<SectionProps["tone"]>, string> = {
 
 const paddingClass: Record<NonNullable<SectionProps["padding"]>, string> = {
   // 128px desktop / 96px tablet / 72px mobile, per the handoff's responsive table.
-  standard: "py-18 md:py-24 desktop:py-32",
+  standard: "py-18 tablet:py-24 desktop:py-32",
   // 96px desktop, scaled proportionally.
-  medium: "py-14 md:py-18 desktop:py-24",
+  medium: "py-14 tablet:py-18 desktop:py-24",
   // 64px desktop, scaled proportionally.
-  tight: "py-9 md:py-12 desktop:py-16",
+  tight: "py-9 tablet:py-12 desktop:py-16",
   // 136px desktop dark statistics field, scaled proportionally.
-  stats: "py-19 md:py-26 desktop:py-34",
+  stats: "py-19 tablet:py-26 desktop:py-34",
   none: "",
 };
 
@@ -45,7 +45,7 @@ export function Section({
       id={id}
       className={cn(toneClass[tone], paddingClass[padding], "scroll-mt-16 desktop:scroll-mt-22", className)}
     >
-      <div className={cn(!fullBleed && "mx-auto max-w-[var(--page-max)] px-5 md:px-10 desktop:px-16")}>
+      <div className={cn(!fullBleed && "mx-auto max-w-[var(--page-max)] px-5 tablet:px-10 desktop:px-16")}>
         {children}
       </div>
     </Tag>

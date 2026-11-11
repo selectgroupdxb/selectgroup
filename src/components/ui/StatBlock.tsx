@@ -71,10 +71,19 @@ export function StatBlock({ value, unit, label, className }: StatBlockProps) {
   }, [value]);
 
   return (
-    <div ref={ref} className={cn("flex flex-col items-center gap-2 text-center", className)}>
-      <span className="text-stat font-display text-white tabular-nums tracking-[0.02em]">{display}</span>
-      <span className="text-stat-unit font-display tracking-chip text-white/60 uppercase">{unit}</span>
-      <span className="text-body-sm text-white/72">{label}</span>
+    <div
+      ref={ref}
+      className={cn("flex min-w-0 flex-col items-center text-center", className)}
+      style={{ containerType: "inline-size" }}
+    >
+      <span
+        className="font-display text-white tabular-nums whitespace-nowrap tracking-[0.02em]"
+        style={{ font: "var(--weight-regular) min(80px, 17cqi)/1 var(--font-display)" }}
+      >
+        {display}
+      </span>
+      <span className="mt-4 text-stat-unit font-display tracking-chip text-white/60 uppercase">{unit}</span>
+      <span className="mt-5 w-full border-t border-white/28 pt-5 text-body-sm text-white/72">{label}</span>
     </div>
   );
 }

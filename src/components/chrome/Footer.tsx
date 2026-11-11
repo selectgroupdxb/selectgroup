@@ -11,7 +11,7 @@ const LEGAL_LINKS = [
 export function Footer() {
   return (
     <footer className="bg-sg-black text-white">
-      <div className="mx-auto max-w-[var(--page-max)] px-5 py-14 md:px-10 desktop:px-16 desktop:py-24">
+      <div className="mx-auto max-w-[var(--page-max)] px-5 py-14 tablet:px-10 desktop:px-16 desktop:py-24">
         <div className="grid gap-10 border-b border-white/14 pb-14 desktop:grid-cols-[1.4fr_1fr_1fr_1fr_1.4fr] desktop:gap-8">
           <div className="flex flex-col gap-5">
             <Logo variant="white" heightClass="h-8" />
