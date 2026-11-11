@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
@@ -73,13 +73,13 @@ export function Navbar() {
         onMouseLeave={scheduleClose}
         className={cn(
           "fixed inset-x-0 top-0 z-50 h-16 transition-colors duration-300 desktop:h-22",
-          solid ? "bg-white shadow-nav" : "bg-transparent",
+          solid ? "bg-white/92 shadow-nav backdrop-blur-[16px]" : "bg-transparent",
         )}
       >
-        <div className="relative mx-auto flex h-full max-w-[var(--page-max)] items-center justify-between px-5 tablet:px-10 desktop:px-16">
-          <Logo variant={solid ? "colour" : "white"} heightClass="h-10 desktop:h-[65px]" />
+        <div className="relative flex h-full items-center px-5 tablet:px-10 desktop:px-16">
+          <Logo variant={solid ? "colour" : "white"} heightClass="h-10 desktop:h-[65px]" boxClassName="desktop:w-[300px]" />
 
-          <nav className="hidden items-center desktop:flex" aria-label="Primary">
+          <nav className="ml-auto hidden items-center desktop:flex desktop:gap-[28px] desktop:mr-10" aria-label="Primary">
             {navGroups.map((group) => {
               const isOpen = openPanel === group.key;
               return (
@@ -90,17 +90,19 @@ export function Navbar() {
                     aria-controls={`mega-${group.key}`}
                     onClick={() => setOpenPanel(group.key)}
                     className={cn(
-                      "flex h-22 items-center gap-1 px-3 text-button font-bold tracking-button whitespace-nowrap uppercase transition-colors duration-180",
+                      "flex h-22 items-center gap-[7px] text-[13px] font-normal tracking-[0.1em] whitespace-nowrap uppercase transition-opacity duration-180",
                       solid ? "text-sg-black" : "text-white",
-                      "hover:text-sg-pacific",
+                      isOpen ? "opacity-[.62]" : "hover:opacity-[.62]",
                     )}
                   >
                     {group.label}
-                    <ChevronDown
-                      size={14}
-                      strokeWidth={2}
-                      className={cn("shrink-0 transition-transform duration-320", isOpen && "rotate-180")}
-                    />
+                    <span
+                      aria-hidden
+                      className="shrink-0 text-[9px] transition-transform duration-320"
+                      style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                    >
+                      &#9662;
+                    </span>
                   </button>
                 </div>
               );
@@ -109,8 +111,9 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onMouseEnter={() => setOpenPanel(null)}
                 className={cn(
-                  "flex h-22 items-center px-3 text-button font-bold tracking-button whitespace-nowrap uppercase transition-colors duration-180 hover:text-sg-pacific",
+                  "flex h-22 items-center text-[13px] font-normal tracking-[0.1em] whitespace-nowrap uppercase transition-opacity duration-180 hover:opacity-[.62]",
                   solid ? "text-sg-black" : "text-white",
                 )}
               >
@@ -119,15 +122,23 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 desktop:gap-3">
+          <div
+            onMouseEnter={() => setOpenPanel(null)}
+            className="ml-auto flex items-center gap-2 desktop:ml-0 desktop:gap-[20px]"
+          >
             <span
               aria-hidden
               className={cn(
-                "hidden h-6 w-px desktop:block",
-                solid ? "bg-sg-grey-4" : "bg-white/32",
+                "hidden h-5 w-px desktop:block",
+                solid ? "bg-sg-grey-4" : "bg-white/35",
               )}
             />
-            <Button href="/contact" variant="filled" size="compact" className="hidden desktop:inline-flex">
+            <Button
+              href="/contact"
+              variant="filled"
+              size="compact"
+              className="hidden h-[42px] px-6 text-[11px] tracking-[0.18em] desktop:inline-flex"
+            >
               Get In Touch
             </Button>
             <button
@@ -139,18 +150,21 @@ export function Navbar() {
                 solid ? "text-sg-black" : "text-white",
               )}
             >
-              <Search size={20} strokeWidth={1.5} />
+              <Search size={17} strokeWidth={1.5} />
             </button>
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open full menu"
               className={cn(
-                "flex h-11 w-11 items-center justify-center transition-colors duration-180",
+                "flex h-11 w-11 items-center justify-center transition-colors duration-180 desktop:hidden",
                 solid ? "text-sg-black" : "text-white",
               )}
             >
-              <Menu size={22} strokeWidth={1.5} />
+              <svg width="20" height="12" viewBox="0 0 20 12" aria-hidden>
+                <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" strokeWidth="1.5" />
+                <line x1="6" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
             </button>
           </div>
 

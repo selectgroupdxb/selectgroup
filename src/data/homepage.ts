@@ -9,9 +9,7 @@
  *
  * `image` fields point at real photography dropped into
  * public/images/homepage/ (see that folder's README). Not every item has one
- * yet — Nautica, Residence 110, Mushrif Village and West Avenue are a known
- * gap (the handoff itself flags these as still needing real photos). Items
- * without an `image` fall back to the neutral ImagePlaceholder.
+ * yet — items without an `image` fall back to the neutral ImagePlaceholder.
  *
  * `slug` fields on developments are the one exception to "verbatim only":
  * the prototype has no canonical slug (it matches developments by `name`
@@ -71,11 +69,11 @@ export const developments: Development[] = [
   { name: "No.9 Residences", slug: "no-9-residences", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–3 bedrooms", price: "Sold out", units: "227 residences", handover: "Handed over", blurb: "A slender residential tower fronting the Dubai Marina promenade.", lat: 25.083401, lng: 55.144731, image: `${IMG}no9-past-developments.jpg` },
   { name: "The Residences at Marina Gate", slug: "the-residences-at-marina-gate", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–4 bedrooms", price: "Sold out", units: "1,354 residences", handover: "Handed over", blurb: "Three towers forming the gateway to Dubai Marina.", lat: 25.087000, lng: 55.147485, image: `${IMG}marina-gate-1-past-developments.jpg` },
   { name: "Jumeirah Living Marina Gate", slug: "jumeirah-living-marina-gate", location: "Dubai Marina", status: "Branded", cats: ["completed", "branded"], types: "2–4 bedrooms", price: "Sold out", units: "389 residences", handover: "Handed over", blurb: "Serviced branded residences operated by Jumeirah Living at Marina Gate.", lat: 25.087629, lng: 55.146463, image: `${IMG}jlmg-development-featured-wide.jpg` },
-  { name: "Nautica", slug: "nautica", location: "Dubai Maritime City", status: "Off Plan", cats: ["offplan"], types: "1–2 bedrooms", price: "Sold out", units: "Two towers, Nautica One and Nautica Two", handover: "Completion 2026", blurb: "Pulsating an Eclectic Nautical Vibe Through its Waterfront Location, Architecture and Design.", lat: 25.263190, lng: 55.269781 },
+  { name: "Nautica", slug: "nautica", location: "Dubai Maritime City", status: "Off Plan", cats: ["offplan"], types: "1–2 bedrooms", price: "Sold out", units: "Two towers, Nautica One and Nautica Two", handover: "Completion 2026", blurb: "Pulsating an Eclectic Nautical Vibe Through its Waterfront Location, Architecture and Design.", lat: 25.263190, lng: 55.269781, image: `${IMG}nautica-past-developments.jpg` },
   { name: "Peninsula One", slug: "peninsula-one", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", price: "Sold out", units: "70 simplex residences", handover: "Handed over", blurb: "The Gateway to Dubai's Most Spectacular Waterfront Community", lat: 25.184859, lng: 55.266631, image: `${IMG}peninsula-one-past-development.jpg` },
   { name: "Peninsula Five", slug: "peninsula-five", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–4 bedrooms", price: "Sold out", units: "60 duplex residences", handover: "Handed over", blurb: "A Superior and Sophisticated Series of Luxurious Residences.", lat: 25.183553, lng: 55.266428, image: `${IMG}peninsula-five-past-development.jpg` },
   { name: "15 Northside", slug: "15-northside", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–4 bedrooms", price: "Sold out", units: "349 residences", handover: "Handed over", blurb: "Bringing The Select Group Standard To Business Bay", lat: 25.186513, lng: 55.286706, image: `${IMG}15-northside-past-development.jpg` },
-  { name: "Residence 110", slug: "residence-110", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", price: "Sold out", units: "19-storey tower", handover: "Handed over", blurb: "Luxury Living In The Heart Of Business Bay", lat: 25.177783, lng: 55.269964, image: `${IMG}residence110-past-developments.jpg` },
+  { name: "Residence 110", slug: "residence-110", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", price: "Sold out", units: "110 residences", handover: "Handed over", blurb: "Luxury Living In The Heart Of Business Bay", lat: 25.177783, lng: 55.269964, image: `${IMG}residence110-past-developments.jpg` },
   { name: "Mushrif Village", slug: "mushrif-village", location: "Mirdif", status: "Completed", cats: ["completed"], types: "2–4 bedroom villas and townhouses", price: "Sold out", units: "122 villas and townhouses", handover: "Handed over", blurb: "A Rare Freehold Ownership Villa Community", lat: 25.231849, lng: 55.441118, image: `${IMG}mushrif-village-past-developments.jpg` },
   { name: "West Avenue", slug: "west-avenue", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", price: "Sold out", units: "276 residences", handover: "Handed over", blurb: "Stylish & Contemporary Residences in a Prime Location", lat: 25.074265, lng: 55.139040, image: `${IMG}west-avenue-past-developments.jpg` },
   { name: "Bay Central", slug: "bay-central", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms and penthouses", price: "Sold out", units: "747 residences", handover: "Handed over", blurb: "An Exclusive Waterfront Development of 3 Mixed-use Towers", lat: 25.078365, lng: 55.137078, image: `${IMG}bay-central-past-developments.jpg` },
@@ -128,6 +126,7 @@ export const pastDevelopments: PastDevelopment[] = [
   { name: "Six Senses Residences, The Palm", year: "May", displayYear: "2026", location: "The Palm", units: "222", meta: "The Palm · 222 units", scaleLabel: "34 floors", gdv: "AED 520 MM", upcoming: true, image: `${IMG}sspalm-past-developments.jpg` },
   { name: "Jumeirah Living", year: "March", displayYear: "2026", location: "Business Bay", units: "82", meta: "Business Bay · 82 units", scaleLabel: "35 floors", gdv: "AED 520 MM", upcoming: true, image: `${IMG}jlbb-past-developments.jpg` },
   { name: "Peninsula Two", year: "2026", displayYear: "2026", location: "Business Bay", units: "439", meta: "Business Bay · 439 units", scaleLabel: "36 floors", gdv: "AED 500 MB", image: `${IMG}peninsula-two-past-development.jpg` },
+  { name: "Nautica", year: "2026", displayYear: "2026", location: "Dubai Maritime City", units: "656", meta: "Dubai Maritime City · 656 units", upcoming: true, image: `${IMG}nautica-past-developments.jpg` },
   { name: "Peninsula Three", year: "2025", displayYear: "2025", location: "Business Bay", units: "853", meta: "Business Bay · 853 units", scaleLabel: "53 floors", gdv: "AED 520 M", image: `${IMG}peninsula-three-past-development.jpg` },
   { name: "Peninsula One", year: "2025", displayYear: "2025", location: "Business Bay", units: "70 simplex", meta: "Business Bay · 70 simplex", scaleLabel: "36 floors", gdv: "AED 1.0 B", upcoming: true, image: `${IMG}peninsula-one-past-development.jpg` },
   { name: "Peninsula Five", year: "2024", displayYear: "2024", location: "Business Bay", units: "60 duplex", meta: "Business Bay · 60 duplex", scaleLabel: "36 floors", gdv: "AED 520 MM", image: `${IMG}peninsula-five-past-development.jpg` },
@@ -135,9 +134,12 @@ export const pastDevelopments: PastDevelopment[] = [
   { name: "Jumeirah Living Marina Gate", year: "2020", displayYear: "2020", location: "Dubai Marina", units: "222", meta: "Dubai Marina · 222 units", scaleLabel: "34 floors", gdv: "AED 520 MM", image: `${IMG}jlmg-past-developments.jpg` },
   { name: "Studio One", year: "2019", displayYear: "2019", location: "Dubai Marina", units: "410", meta: "Dubai Marina · 410 units", scaleLabel: "31 floors", gdv: "AED 500 MB", image: `${IMG}studio-one-past-developments.jpg` },
   { name: "Marina Gate II", year: "2019", displayYear: "2019", location: "Dubai Marina", units: "535", meta: "Dubai Marina · 535 units", scaleLabel: "64 floors", gdv: "AED 1.6 B", image: `${IMG}marina-gate-2-past-developments.jpg` },
+  { name: "Residence 110", year: "2019", displayYear: "2019", location: "Business Bay", units: "110", meta: "Business Bay · 110 units", image: `${IMG}residence110-past-developments.jpg` },
   { name: "No.9", year: "2018", displayYear: "2018", location: "Dubai Marina", units: "222", meta: "Dubai Marina · 222 units", scaleLabel: "34 floors", gdv: "AED 520 M", image: `${IMG}no9-past-developments.jpg` },
   { name: "Marina Gate 1", year: "2018", displayYear: "2018", location: "Dubai Marina", units: "415", meta: "Dubai Marina · 415 units", scaleLabel: "51 floors", gdv: "AED 1.3 B", image: `${IMG}marina-gate-1-past-developments.jpg` },
+  { name: "Mushrif Village", year: "2018", displayYear: "2018", location: "Mirdif", units: "122", meta: "Mirdif · 122 units", image: `${IMG}mushrif-village-past-developments.jpg` },
   { name: "Pacific", year: "2017", displayYear: "2017", location: "Ras Al Khaimah", units: "1,376", meta: "Ras Al Khaimah · 1,376 units", scaleLabel: "6 bldgs", gdv: "AED 1.0 B", image: `${IMG}pacific-past-developments.jpg` },
+  { name: "West Avenue", year: "2014", displayYear: "2014", location: "Dubai Marina", units: "276", meta: "Dubai Marina · 276 units", image: `${IMG}west-avenue-past-developments.jpg` },
   { name: "Bay Central I & II", year: "2012", displayYear: "2012", location: "Dubai Marina", units: "747", meta: "Dubai Marina · 747 units", scaleLabel: "39 + 47 fl.", gdv: "AED 1.13 BM", image: `${IMG}bay-central-past-developments.jpg` },
   { name: "The Torch", year: "2011", displayYear: "2011", location: "Dubai Marina", units: "682", meta: "Dubai Marina · 682 units", scaleLabel: "84 floors", gdv: "AED 1.0 B", image: `${IMG}torch-past-developments.jpg` },
   { name: "Botanica", year: "2010", displayYear: "2010", location: "Dubai Marina", units: "371", meta: "Dubai Marina · 371 units", scaleLabel: "41 floors", gdv: "AED 580 MM", image: `${IMG}botanica-past-developments.jpg` },
@@ -154,7 +156,7 @@ export interface PastDevelopmentsStat {
 }
 
 export const pastDevelopmentsStats: PastDevelopmentsStat[] = [
-  { value: "21", label: "Developments delivered or under delivery" },
+  { value: "25", label: "Developments delivered or under delivery" },
   { value: "8,701", label: "Homes across the completed portfolio" },
   { value: "24.7M", label: "Sq.ft. of residential, retail and mixed-use space" },
   { value: "2007", label: "First tower handed over in Dubai Marina" },
@@ -237,13 +239,17 @@ export interface BrandedCarouselSlide {
   eyebrow: string;
   body: string;
   image?: string;
+  /** White-knockout partner logo mark for the dark overlay badge — expects a light/transparent background. */
+  logo?: string;
+  /** Natural logo aspect ratio (width / height), so the badge sizes it without distortion. */
+  logoAspect?: number;
 }
 
 export const brandedCarousel: BrandedCarouselSlide[] = [
-  { partner: "Six Senses", name: "Six Senses Residences Dubai Marina", eyebrow: "Six Senses' First-Ever Standalone Branded Residential Development", body: "A monumental milestone in the world of ultra-luxury living, positioned to revolutionise branded residences and dominate the Marina skyline as the tallest residential tower in the world.", image: `${IMG}ssdm-branded-residence.jpg` },
-  { partner: "Jumeirah", name: "Jumeirah Living Business Bay", eyebrow: "Immersive Luxury In An Idyllic Waterfront Location", body: "Designed to be admired as a prominent highlight of the Downtown Dubai skyline, the 35-storey tower features 82 spacious residences with curated branded amenities and services.", image: `${IMG}jlbb-branded-residence.jpg` },
-  { partner: "Six Senses", name: "Six Senses Residences The Palm", eyebrow: "Wellness Living On The Palm Jumeirah", body: "A wellness-led beachfront address on the Palm Jumeirah, developed with Six Senses and shaped around the brand's own standards of restoration and care.", image: `${IMG}six-senses-palm-branded-residence.jpg` },
-  { partner: "Jumeirah", name: "Jumeirah Living Marina Gate", eyebrow: "Branded Waterfront Living In Dubai Marina", body: "Occupying a landmark position at the entrance to Dubai Marina, Jumeirah Living Marina Gate brings the hospitality standards of Jumeirah to a residential address, with serviced amenities and full marina frontage.", image: `${IMG}jlmg-branded-residence.jpg` },
+  { partner: "Six Senses", name: "Six Senses Residences Dubai Marina", eyebrow: "Six Senses' First-Ever Standalone Branded Residential Development", body: "A monumental milestone in the world of ultra-luxury living, positioned to revolutionise branded residences and dominate the Marina skyline as the tallest residential tower in the world.", image: `${IMG}ssdm-branded-residence.jpg`, logo: `${IMG}ssr-white-logo.png`, logoAspect: 600 / 343 },
+  { partner: "Jumeirah", name: "Jumeirah Living Business Bay", eyebrow: "Immersive Luxury In An Idyllic Waterfront Location", body: "Designed to be admired as a prominent highlight of the Downtown Dubai skyline, the 35-storey tower features 82 spacious residences with curated branded amenities and services.", image: `${IMG}jlbb-branded-residence.jpg`, logo: `${IMG}Jumeirah_Logo_whitesvg.svg`, logoAspect: 566.94 / 108.54 },
+  { partner: "Six Senses", name: "Six Senses Residences The Palm", eyebrow: "Wellness Living On The Palm Jumeirah", body: "A wellness-led beachfront address on the Palm Jumeirah, developed with Six Senses and shaped around the brand's own standards of restoration and care.", image: `${IMG}six-senses-palm-branded-residence.jpg`, logo: `${IMG}ssr-white-logo.png`, logoAspect: 600 / 343 },
+  { partner: "Jumeirah", name: "Jumeirah Living Marina Gate", eyebrow: "Branded Waterfront Living In Dubai Marina", body: "Occupying a landmark position at the entrance to Dubai Marina, Jumeirah Living Marina Gate brings the hospitality standards of Jumeirah to a residential address, with serviced amenities and full marina frontage.", image: `${IMG}jlmg-branded-residence.jpg`, logo: `${IMG}Jumeirah_Logo_whitesvg.svg`, logoAspect: 566.94 / 108.54 },
 ];
 
 // ---------------------------------------------------------------------------

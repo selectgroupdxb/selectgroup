@@ -78,7 +78,7 @@ export function StatBlock({ value, unit, label, className }: StatBlockProps) {
     >
       <span
         className="font-display text-white tabular-nums whitespace-nowrap tracking-[0.02em]"
-        style={{ font: "var(--weight-regular) min(80px, 17cqi)/1 var(--font-display)" }}
+        style={{ fontSize: "min(80px, 17cqi)", lineHeight: 1, fontWeight: 400 }}
       >
         {display}
       </span>

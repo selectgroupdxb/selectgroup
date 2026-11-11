@@ -22,27 +22,33 @@ export function WhatWeDo() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 tablet:grid-cols-2 desktop:grid-cols-4">
+        <div className="grid grid-cols-1 items-center gap-5 tablet:grid-cols-2 desktop:grid-cols-4">
           {verticals.map((vertical) => (
             <Link
               key={vertical.title}
               href={`/investments/${vertical.invPage}`}
-              className="group relative block h-[480px] overflow-hidden desktop:h-[620px]"
+              className="group relative block h-[520px] overflow-hidden"
             >
               <ImagePlaceholder
                 label={vertical.title}
                 src={vertical.image}
                 alt={vertical.title}
                 sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
-                className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
+                className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.06]"
               />
+              <div className="absolute inset-0" style={{ background: "var(--scrim-tile-base)" }} aria-hidden />
               <div
-                className="absolute inset-0 transition-opacity duration-320 group-hover:opacity-90"
-                style={{ background: "var(--scrim-card)" }}
+                className="absolute inset-0 opacity-0 transition-opacity duration-320 group-hover:opacity-100 group-focus-within:opacity-100"
+                style={{ background: "var(--scrim-tile-hover)" }}
                 aria-hidden
               />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <h3 className="text-h3 text-white">{vertical.title}</h3>
+              <div className="absolute inset-x-0 bottom-0 flex flex-col pb-7" style={{ paddingLeft: 24, paddingRight: 24 }}>
+                <h3
+                  className="text-[22px] leading-[1.22] text-white"
+                  style={{ textShadow: "0 1px 20px rgba(0,0,0,.5)" }}
+                >
+                  {vertical.title}
+                </h3>
                 <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-420 group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr]">
                   <div className="overflow-hidden">
                     <p className="mt-3 text-body-sm text-white/82 opacity-0 transition-opacity duration-320 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100">

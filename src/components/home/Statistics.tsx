@@ -22,7 +22,7 @@ export function Statistics() {
         className="absolute inset-0"
       />
       <div className="absolute inset-0" style={{ background: "var(--scrim-stats)" }} aria-hidden />
-      <div className="relative mx-auto max-w-[var(--page-max)] px-5 tablet:px-10 desktop:px-16">
+      <div className="relative px-5 tablet:px-10 desktop:px-16">
         <Eyebrow tone="inverse" className="mb-16 text-center">
           Developing Premium Real Estate Since 2002
         </Eyebrow>

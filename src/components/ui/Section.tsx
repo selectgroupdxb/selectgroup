@@ -45,7 +45,7 @@ export function Section({
       id={id}
       className={cn(toneClass[tone], paddingClass[padding], "scroll-mt-16 desktop:scroll-mt-22", className)}
     >
-      <div className={cn(!fullBleed && "mx-auto max-w-[var(--page-max)] px-5 tablet:px-10 desktop:px-16")}>
+      <div className={cn(!fullBleed && "px-5 tablet:px-10 desktop:px-16")}>
         {children}
       </div>
     </Tag>
