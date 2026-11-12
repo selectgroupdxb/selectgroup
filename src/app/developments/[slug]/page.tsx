@@ -15,6 +15,7 @@ import { ConstructionProgress } from "@/components/developments/ConstructionProg
 import { EnquiryForm } from "@/components/developments/EnquiryForm";
 import { ProjectFAQ } from "@/components/developments/ProjectFAQ";
 import { ProjectCTA } from "@/components/developments/ProjectCTA";
+import { StickyEnquiryBar } from "@/components/developments/StickyEnquiryBar";
 
 export function generateStaticParams() {
   return developments.map((d) => ({ slug: d.slug }));
@@ -58,9 +59,9 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
       {detail ? (
         <>
           <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery} />
-          <KeyFacts facts={detail.keyFacts} />
-          <ContentBlock block={detail.theTower} />
-          <ContentBlock block={detail.theResidences} />
+          <ContentBlock block={detail.theTower} imageRight={false} />
+          <KeyFacts facts={detail.keyFacts} id="key-facts" />
+          <ContentBlock block={detail.theResidences} imageRight />
           <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />
           {isBranded && detail.experience ? (
             <SixSensesExperience
@@ -85,10 +86,19 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
               handover={detail.constructionProgress.handover}
               pct={detail.constructionProgress.pct}
               milestones={detail.constructionProgress.milestones}
+              quarters={detail.constructionProgress.quarters}
             />
           ) : null}
           <EnquiryForm developmentName={development.name} image={detail.enquireImage} />
           <ProjectFAQ items={detail.faq} />
+          <StickyEnquiryBar
+            name={development.name}
+            heroSub={detail.hero.heroSub}
+            priceLabel={detail.hero.priceLabel}
+            price={detail.hero.price}
+            priceNote={detail.hero.priceNote}
+            triggerId="key-facts"
+          />
         </>
       ) : (
         <>

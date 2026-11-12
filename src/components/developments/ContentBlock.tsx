@@ -21,14 +21,16 @@ const toneClass = {
   cobalt: "bg-sg-cobalt text-white",
 };
 
-export function ContentBlock({ block, tone = "white", accent = false, cta, headingAs = "h2", imageRight = false }: ContentBlockProps) {
+export function ContentBlock({ block, tone = "white", accent = false, cta, headingAs = "h2", imageRight = true }: ContentBlockProps) {
   const inverse = tone === "cobalt";
   const Heading = headingAs;
   const [lede, ...rest] = block.paragraphs;
 
   return (
     <Section tone="white" padding="standard" className={cn(toneClass[tone])}>
-      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20", imageRight && "desktop:[&>*:first-child]:order-1")}>
+      {/* Natural DOM order is text-then-image (image on the right). When
+          imageRight is false, push the text column after the image instead. */}
+      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20", !imageRight && "desktop:[&>*:first-child]:order-1")}>
         <div>
           <Eyebrow tone={inverse ? "inverse" : "muted"}>{block.eyebrow}</Eyebrow>
           <Heading className={cn("mt-3 max-w-[20ch] text-h2", inverse ? "text-white" : "text-sg-black")}>

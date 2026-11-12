@@ -46,6 +46,9 @@ export type ConstructionMilestone = {
   pct: number;
 };
 
+export type ConstructionShot = { image?: string; caption: string };
+export type ConstructionQuarter = { period: string; shots: ConstructionShot[] };
+
 export type GalleryCategory = "exterior" | "residences" | "amenities" | "views";
 
 export type GalleryItem = {
@@ -102,6 +105,7 @@ export interface DevelopmentDetail {
     handover: string;
     pct: number;
     milestones: ConstructionMilestone[];
+    quarters: ConstructionQuarter[];
   };
   enquireImage?: string;
   gallery: GalleryItem[];
@@ -233,6 +237,45 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
         { label: "Facade installation", status: "In progress", pct: 14 },
         { label: "MEP first fix", status: "In progress", pct: 9 },
         { label: "Interior fit-out", status: "In progress", pct: 3 },
+      ],
+      // Verbatim from the prototype's PROG_SHOTS. Captions are real; most of
+      // the referenced image filenames (hpgrid-7.jpg, area-dm.jpg, jlbb.jpg,
+      // cta-bg.jpg, principle-generous.jpg) are reused stock/homepage assets
+      // in the prototype itself, not real site photography, and aren't in
+      // this repo — left unset so they render as labelled placeholders.
+      quarters: [
+        {
+          period: "Q1 2026",
+          shots: [
+            { image: `${IMG}six-senses-marina-hp-hero.jpg`, caption: "Tower rising above podium level" },
+            { image: undefined, caption: "Core slipform at level 42" },
+            { image: undefined, caption: "Marina frontage, looking north" },
+          ],
+        },
+        {
+          period: "Q4 2025",
+          shots: [
+            { image: undefined, caption: "Structure topping out the podium" },
+            { image: undefined, caption: "Site logistics and tower cranes" },
+            { image: undefined, caption: "First facade mock-up panel" },
+          ],
+        },
+        {
+          period: "Q3 2025",
+          shots: [
+            { image: undefined, caption: "Substructure complete" },
+            { image: undefined, caption: "Raft pour, north sector" },
+            { image: undefined, caption: "Basement retaining walls" },
+          ],
+        },
+        {
+          period: "Q2 2025",
+          shots: [
+            { image: undefined, caption: "Excavation and shoring" },
+            { image: undefined, caption: "Piling rigs on site" },
+            { image: undefined, caption: "Site hoarding and access road" },
+          ],
+        },
       ],
     },
     enquireImage: `${IMG}six-senses-marina-hp-hero.jpg`, // prototype ref: six-senses-marina.jpg
