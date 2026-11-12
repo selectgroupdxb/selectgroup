@@ -12,8 +12,9 @@ type NeighbourhoodProps = {
 
 export function Neighbourhood({ title, paragraphs, stats, image }: NeighbourhoodProps) {
   return (
-    <Section tone="white" padding="standard" className="bg-sg-tint-2">
-      <div className="grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20">
+    <Section tone="white" padding="none" className="py-18 tablet:py-24 desktop:py-28">
+      <div className="grid items-center gap-10 desktop:grid-cols-2 desktop:gap-18">
+        <ImagePlaceholder label={title} src={image} className="h-[320px] tablet:h-[440px] desktop:h-[600px]" sizes="(min-width: 1200px) 50vw, 100vw" />
         <div>
           <Eyebrow>The Neighbourhood</Eyebrow>
           <h2 className="mt-3 max-w-[18ch] text-h2 text-sg-black">{title}</h2>
@@ -31,7 +32,6 @@ export function Neighbourhood({ title, paragraphs, stats, image }: Neighbourhood
             ))}
           </div>
         </div>
-        <ImagePlaceholder label={title} src={image} aspect="4/5" sizes="(min-width: 1200px) 50vw, 100vw" />
       </div>
     </Section>
   );

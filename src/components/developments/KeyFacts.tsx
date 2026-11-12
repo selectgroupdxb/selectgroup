@@ -1,12 +1,14 @@
 export function KeyFacts({ facts, id }: { facts: { label: string; value: string }[]; id?: string }) {
   return (
-    <div id={id} className="grid grid-cols-2 bg-sg-black tablet:grid-cols-3 desktop:grid-cols-5">
-      {facts.map((fact) => (
-        <div key={fact.label} className="border-l border-white/14 px-5 py-7 first:border-l-0 tablet:px-6">
-          <p className="text-[10px] font-bold tracking-[0.2em] text-white/60 uppercase">{fact.label}</p>
-          <p className="mt-2 text-[20px] tracking-heading text-white uppercase">{fact.value}</p>
-        </div>
-      ))}
-    </div>
+    <section id={id} className="bg-sg-white px-5 tablet:px-10 desktop:px-16">
+      <div className="grid grid-cols-2 bg-sg-black tablet:grid-cols-3 desktop:grid-cols-5">
+        {facts.map((fact) => (
+          <div key={fact.label} className="border-l border-white/14 px-5 py-7 first:border-l-0 tablet:px-6">
+            <p className="text-[10px] font-bold tracking-[0.2em] text-white/60 uppercase">{fact.label}</p>
+            <p className="mt-2 text-[20px] tracking-heading text-white uppercase">{fact.value}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }

@@ -4,8 +4,8 @@ import type { AmenityItem } from "@/data/developmentDetails";
 
 export function Amenities({ title, body, items }: { title: string; body: string; items: AmenityItem[] }) {
   return (
-    <Section tone="white" padding="standard">
-      <div className="grid gap-10 desktop:grid-cols-2 desktop:gap-20">
+    <Section tone="white" padding="none" className="py-18 tablet:py-24 desktop:py-28">
+      <div className="grid gap-10 desktop:grid-cols-2 desktop:gap-16">
         <div>
           <Eyebrow>Amenities</Eyebrow>
           <h2 className="mt-3 max-w-[18ch] text-h2 text-sg-black">{title}</h2>

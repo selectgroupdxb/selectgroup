@@ -13,6 +13,8 @@ type ContentBlockProps = {
   cta?: { label: string; href: string };
   headingAs?: "h2" | "h3";
   imageRight?: boolean;
+  /** Drops bottom padding so the next section (e.g. Key Facts) sits flush under this one, per source. */
+  noBottomPadding?: boolean;
 };
 
 const toneClass = {
@@ -21,16 +23,28 @@ const toneClass = {
   cobalt: "bg-sg-cobalt text-white",
 };
 
-export function ContentBlock({ block, tone = "white", accent = false, cta, headingAs = "h2", imageRight = true }: ContentBlockProps) {
+export function ContentBlock({
+  block,
+  tone = "white",
+  accent = false,
+  cta,
+  headingAs = "h2",
+  imageRight = true,
+  noBottomPadding = false,
+}: ContentBlockProps) {
   const inverse = tone === "cobalt";
   const Heading = headingAs;
   const [lede, ...rest] = block.paragraphs;
 
   return (
-    <Section tone="white" padding="standard" className={cn(toneClass[tone])}>
+    <Section
+      tone="white"
+      padding="none"
+      className={cn(toneClass[tone], "pt-18 tablet:pt-24 desktop:pt-28", noBottomPadding ? "pb-0" : "pb-18 tablet:pb-24 desktop:pb-28")}
+    >
       {/* Natural DOM order is text-then-image (image on the right). When
           imageRight is false, push the text column after the image instead. */}
-      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20", !imageRight && "desktop:[&>*:first-child]:order-1")}>
+      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-18", !imageRight && "desktop:[&>*:first-child]:order-1")}>
         <div>
           <Eyebrow tone={inverse ? "inverse" : "muted"}>{block.eyebrow}</Eyebrow>
           <Heading className={cn("mt-3 max-w-[20ch] text-h2", inverse ? "text-white" : "text-sg-black")}>
@@ -57,7 +71,7 @@ export function ContentBlock({ block, tone = "white", accent = false, cta, headi
           label={block.title}
           src={block.image}
           alt={block.alt}
-          aspect="4/5"
+          className="h-[320px] tablet:h-[440px] desktop:h-[600px]"
           sizes="(min-width: 1200px) 50vw, 100vw"
         />
       </div>

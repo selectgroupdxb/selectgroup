@@ -59,7 +59,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
       {detail ? (
         <>
           <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery} />
-          <ContentBlock block={detail.theTower} imageRight={false} />
+          <ContentBlock block={detail.theTower} imageRight={false} noBottomPadding />
           <KeyFacts facts={detail.keyFacts} id="key-facts" />
           <ContentBlock block={detail.theResidences} imageRight />
           <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />

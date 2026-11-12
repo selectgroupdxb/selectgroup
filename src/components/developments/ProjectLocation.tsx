@@ -10,8 +10,8 @@ type ProjectLocationProps = {
 
 export function ProjectLocation({ proximity, mapNote }: ProjectLocationProps) {
   return (
-    <Section tone="black" padding="standard">
-      <div className="grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20">
+    <Section tone="black" padding="none" className="py-18 tablet:py-24 desktop:py-28">
+      <div className="grid items-center gap-10 desktop:grid-cols-2 desktop:gap-18">
         <div>
           <Eyebrow tone="inverse">Location &amp; Connectivity</Eyebrow>
           <h2 className="mt-3 max-w-[20ch] text-h2 text-white">Proximity To Key Areas</h2>
@@ -29,7 +29,7 @@ export function ProjectLocation({ proximity, mapNote }: ProjectLocationProps) {
           <p className="mt-4 text-[12px] text-white/50">Drive times indicative, off-peak.</p>
         </div>
         <div className="relative">
-          <ImagePlaceholder label="Location map" aspect="1/1" sizes="(min-width: 1200px) 50vw, 100vw" />
+          <ImagePlaceholder label="Location map" className="h-[300px] tablet:h-[420px] desktop:h-[560px]" sizes="(min-width: 1200px) 50vw, 100vw" />
           <p className="mt-3 text-body-sm text-white/50">{mapNote}</p>
         </div>
       </div>

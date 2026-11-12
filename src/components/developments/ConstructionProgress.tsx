@@ -26,7 +26,7 @@ export function ConstructionProgress({ updated, handover, pct, milestones, quart
   const quarter = quarters[activeQuarter];
 
   return (
-    <Section tone="white" padding="standard">
+    <Section tone="white" padding="none" className="py-18 tablet:py-24 desktop:py-28">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <Eyebrow>Construction Progress</Eyebrow>
@@ -35,8 +35,8 @@ export function ConstructionProgress({ updated, handover, pct, milestones, quart
         <p className="text-body-sm text-sg-grey-2">Last updated {updated}</p>
       </div>
 
-      <div className="mt-10 grid gap-12 desktop:mt-14 desktop:grid-cols-2 desktop:gap-16">
-        <div>
+      <div className="mt-10 grid items-stretch gap-12 desktop:mt-14 desktop:grid-cols-2 desktop:gap-16">
+        <div className="flex flex-col">
           <div className="flex flex-wrap gap-2" role="tablist">
             {quarters.map((q, i) => (
               <button
@@ -54,9 +54,9 @@ export function ConstructionProgress({ updated, handover, pct, milestones, quart
               </button>
             ))}
           </div>
-          <div className="mt-5 flex gap-4 overflow-x-auto [scrollbar-width:none]">
+          <div className="mt-5 flex flex-1 gap-4 overflow-x-auto [scrollbar-width:none]">
             {quarter.shots.map((shot) => (
-              <div key={shot.caption} className="relative aspect-[4/3] w-[82%] shrink-0 overflow-hidden tablet:w-[60%]">
+              <div key={shot.caption} className="relative aspect-[4/3] h-full shrink-0 overflow-hidden">
                 <ImagePlaceholder label={shot.caption} src={shot.image} className="absolute inset-0" />
                 <div
                   className="absolute inset-0"
