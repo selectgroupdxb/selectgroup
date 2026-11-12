@@ -1,35 +1,69 @@
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Button } from "@/components/ui/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { ProjectGallery } from "./ProjectGallery";
 import type { Development } from "@/data/homepage";
+import type { DevelopmentDetail } from "@/data/developmentDetails";
 
-export function ProjectHero({ development, tagline, body }: { development: Development; tagline: string; body: string }) {
+type ProjectHeroProps = {
+  development: Development;
+  hero: DevelopmentDetail["hero"];
+  gallery: DevelopmentDetail["gallery"];
+};
+
+export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
   return (
-    <section className="relative flex min-h-[640px] h-[100svh] max-h-[880px] items-end overflow-hidden bg-sg-black">
-      <ImagePlaceholder
-        label={`${development.name} hero`}
-        src={development.image}
-        alt={development.name}
-        sizes="100vw"
-        priority
-        className="absolute inset-0"
-      />
-      <div className="absolute inset-0" style={{ background: "var(--scrim-hero-slide-linear)" }} aria-hidden />
-      <div className="relative w-full px-5 pb-14 tablet:px-10 desktop:px-16">
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Developments", href: "/developments" }, { label: development.name }]} />
-        <div className="mt-4 flex flex-wrap items-baseline gap-4">
-          <h1 className="max-w-[24ch] text-h1 text-white uppercase">{development.name}</h1>
-          <span className="text-body text-white/60">{development.location}</span>
+    <>
+      <section className="relative mt-16 flex h-[min(880px,86svh)] min-h-[420px] items-end overflow-hidden bg-sg-black desktop:mt-22">
+        <ImagePlaceholder
+          label={`${development.name} hero`}
+          src={hero.image}
+          alt={development.name}
+          sizes="100vw"
+          priority
+          className="absolute inset-0"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to bottom, rgba(34,34,34,.28) 0%, rgba(34,34,34,.14) 40%, rgba(34,34,34,.72) 100%)" }}
+          aria-hidden
+        />
+
+        <div className="absolute top-9 left-5 tablet:left-10 desktop:left-16">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Developments", href: "/developments" }, { label: development.name }]} />
         </div>
-        <p className="mt-3 max-w-[48ch] text-[20px] font-light text-white/90">{tagline}</p>
-        <p className="mt-4 max-w-prose text-body-lg font-light text-white/82">{body}</p>
-        <div className="mt-7 flex flex-wrap items-center gap-4">
-          <span className="text-h3 text-white">{development.price}</span>
-          <Button href="/contact" variant="filled">
-            Enquire
-          </Button>
+
+        <div className="absolute top-8 right-5 hidden max-w-[240px] rounded-sm border border-white/24 bg-black/42 p-5 backdrop-blur-md tablet:right-10 tablet:block desktop:right-16">
+          <p className="text-[10px] font-bold tracking-[0.2em] text-white/70 uppercase">{hero.priceLabel}</p>
+          <p className="mt-1 text-h3 text-white">{hero.price}</p>
+          <p className="mt-1 text-body-sm text-white/70">{hero.priceNote}</p>
         </div>
-      </div>
-    </section>
+
+        <div className="relative w-full px-5 pb-16 tablet:px-10 desktop:px-16">
+          {hero.brandName ? (
+            <div className="flex items-baseline gap-4">
+              <p className="text-[clamp(32px,5vw,48px)] font-display tracking-heading text-white uppercase">{hero.brandName}</p>
+              <span className="text-[14px] font-light tracking-[0.3em] text-white/82 uppercase">{hero.brandSub}</span>
+            </div>
+          ) : (
+            <p className="max-w-[22ch] text-[clamp(36px,5.5vw,56px)] font-display tracking-heading text-white uppercase">{development.name}</p>
+          )}
+          <p className="mt-5 max-w-[48ch] text-body-lg font-light text-white/82">{hero.heroSub}</p>
+          <div className="mt-8 flex flex-wrap gap-3.5">
+            <Button href="#register" variant="outline-inverse">
+              Register Your Interest
+            </Button>
+            {gallery.length > 0 ? <ProjectGallery items={gallery} /> : null}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-sg-white px-5 py-14 tablet:px-10 tablet:py-18 desktop:px-16 desktop:py-20">
+        <Eyebrow>{hero.introEyebrow}</Eyebrow>
+        <h1 className="mt-3 max-w-[22ch] text-h1 text-sg-black">{development.name}</h1>
+        <p className="mt-6 max-w-prose text-body-lg font-light text-sg-grey-1">{hero.introBody}</p>
+      </section>
+    </>
   );
 }

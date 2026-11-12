@@ -6,11 +6,13 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { ProjectHero } from "@/components/developments/ProjectHero";
 import { KeyFacts } from "@/components/developments/KeyFacts";
 import { ContentBlock } from "@/components/developments/ContentBlock";
-import { ResidenceTypes } from "@/components/developments/ResidenceTypes";
-import { WellnessAmenities } from "@/components/developments/WellnessAmenities";
-import { ProjectGallery } from "@/components/developments/ProjectGallery";
+import { Amenities } from "@/components/developments/Amenities";
+import { SixSensesExperience } from "@/components/developments/SixSensesExperience";
+import { Neighbourhood } from "@/components/developments/Neighbourhood";
 import { ProjectLocation } from "@/components/developments/ProjectLocation";
-import { PartnershipDeveloper } from "@/components/developments/PartnershipDeveloper";
+import { SelectDifference } from "@/components/developments/SelectDifference";
+import { ConstructionProgress } from "@/components/developments/ConstructionProgress";
+import { EnquiryForm } from "@/components/developments/EnquiryForm";
 import { ProjectFAQ } from "@/components/developments/ProjectFAQ";
 import { ProjectCTA } from "@/components/developments/ProjectCTA";
 
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!development) return {};
 
   const detail = developmentDetails[development.slug];
-  const description = detail?.heroBody ?? development.blurb;
+  const description = detail?.hero.introBody ?? development.blurb;
 
   return {
     title: development.name,
@@ -44,40 +46,65 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
   if (!development) notFound();
 
   const detail = developmentDetails[development.slug];
+  const isBranded = development.cats.includes("branded");
+  const isHandedOver = development.status === "Completed";
 
   return (
     <>
       <BreadcrumbJsonLd
         items={[{ label: "Home", href: "/" }, { label: "Developments", href: "/developments" }, { label: development.name }]}
       />
-      <ProjectHero
-        development={development}
-        tagline={detail?.heroTagline ?? development.blurb}
-        body={detail?.heroBody ?? development.blurb}
-      />
 
       {detail ? (
         <>
+          <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery} />
           <KeyFacts facts={detail.keyFacts} />
-          <ContentBlock block={detail.introduction} accent />
-          {detail.residenceTypes ? <ResidenceTypes items={detail.residenceTypes} /> : null}
-          {detail.wellnessIntro && detail.amenityLevels ? (
-            <WellnessAmenities intro={detail.wellnessIntro} levels={detail.amenityLevels} />
+          <ContentBlock block={detail.theTower} />
+          <ContentBlock block={detail.theResidences} />
+          <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />
+          {isBranded && detail.experience ? (
+            <SixSensesExperience
+              image={detail.experience.image}
+              eyebrow={detail.experience.eyebrow}
+              title={detail.experience.title}
+              body={detail.experience.body}
+              pillars={detail.experience.pillars}
+            />
           ) : null}
-          {detail.design?.map((block, i) => (
-            <ContentBlock key={block.title} block={block} tone="tint" headingAs={i === 0 ? "h2" : "h3"} />
-          ))}
-          {detail.service ? (
-            <ContentBlock block={detail.service} tone="cobalt" cta={{ label: "Request the owner services guide", href: "/contact" }} />
+          <Neighbourhood
+            title={detail.neighbourhood.title}
+            paragraphs={detail.neighbourhood.paragraphs}
+            stats={detail.neighbourhood.stats}
+            image={detail.neighbourhood.image}
+          />
+          <ProjectLocation proximity={detail.location.proximity} mapNote={detail.location.mapNote} />
+          <SelectDifference />
+          {!isHandedOver && detail.constructionProgress ? (
+            <ConstructionProgress
+              updated={detail.constructionProgress.updated}
+              handover={detail.constructionProgress.handover}
+              pct={detail.constructionProgress.pct}
+              milestones={detail.constructionProgress.milestones}
+            />
           ) : null}
-          {detail.gallery ? <ProjectGallery items={detail.gallery} title={`Inside ${development.name}`} /> : null}
-          <ProjectLocation body={detail.locationBody} nearby={detail.locationNearby} />
-          <PartnershipDeveloper partnership={detail.partnership} developerBlurb={detail.developerBlurb} />
-          {detail.faq ? <ProjectFAQ items={detail.faq} /> : null}
-          <ProjectCTA title={detail.ctaTitle} image={detail.gallery?.[0]?.image} />
+          <EnquiryForm developmentName={development.name} image={detail.enquireImage} />
+          <ProjectFAQ items={detail.faq} />
         </>
       ) : (
         <>
+          <ProjectHero
+            development={development}
+            hero={{
+              image: development.image,
+              heroSub: `${development.location} · ${development.types}`,
+              price: development.price,
+              priceLabel: "Starting From",
+              priceNote: development.units,
+              introEyebrow: development.location,
+              introBody: development.blurb,
+            }}
+            gallery={[]}
+          />
           <KeyFacts
             facts={[
               { label: "Location", value: development.location },

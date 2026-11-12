@@ -19,15 +19,14 @@ const CLOSE_DELAY_MS = 150;
 // same transparent-until-scrolled treatment as the homepage. Every other
 // route starts solid, since a transparent nav over a plain white page top
 // would be unreadable.
+// Individual project pages (`/developments/[slug]`) reserve solid nav space
+// above the hero (see ProjectHero's `pt-22` offset) rather than floating the
+// nav over the image, so they're deliberately excluded here.
 const TRANSPARENT_HERO_ROUTES = ["/", "/developments"];
-
-function hasTransparentHeroFor(pathname: string) {
-  return TRANSPARENT_HERO_ROUTES.includes(pathname) || pathname.startsWith("/developments/");
-}
 
 export function Navbar() {
   const pathname = usePathname();
-  const hasTransparentHero = hasTransparentHeroFor(pathname);
+  const hasTransparentHero = TRANSPARENT_HERO_ROUTES.includes(pathname);
 
   const [scrolled, setScrolled] = useState(false);
   const [openPanel, setOpenPanel] = useState<NavGroup["key"] | null>(null);

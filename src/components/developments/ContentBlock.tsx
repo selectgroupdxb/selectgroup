@@ -3,7 +3,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
-import type { ContentBlock as ContentBlockData } from "@/data/developmentDetails";
+import type { TwoColBlock as ContentBlockData } from "@/data/developmentDetails";
 
 type ContentBlockProps = {
   block: ContentBlockData;
@@ -12,6 +12,7 @@ type ContentBlockProps = {
   accent?: boolean;
   cta?: { label: string; href: string };
   headingAs?: "h2" | "h3";
+  imageRight?: boolean;
 };
 
 const toneClass = {
@@ -20,14 +21,14 @@ const toneClass = {
   cobalt: "bg-sg-cobalt text-white",
 };
 
-export function ContentBlock({ block, tone = "white", accent = false, cta, headingAs = "h2" }: ContentBlockProps) {
+export function ContentBlock({ block, tone = "white", accent = false, cta, headingAs = "h2", imageRight = false }: ContentBlockProps) {
   const inverse = tone === "cobalt";
   const Heading = headingAs;
   const [lede, ...rest] = block.paragraphs;
 
   return (
     <Section tone="white" padding="standard" className={cn(toneClass[tone])}>
-      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20", block.imageRight && "desktop:[&>*:first-child]:order-1")}>
+      <div className={cn("grid items-center gap-10 desktop:grid-cols-2 desktop:gap-20", imageRight && "desktop:[&>*:first-child]:order-1")}>
         <div>
           <Eyebrow tone={inverse ? "inverse" : "muted"}>{block.eyebrow}</Eyebrow>
           <Heading className={cn("mt-3 max-w-[20ch] text-h2", inverse ? "text-white" : "text-sg-black")}>
@@ -53,6 +54,7 @@ export function ContentBlock({ block, tone = "white", accent = false, cta, headi
         <ImagePlaceholder
           label={block.title}
           src={block.image}
+          alt={block.alt}
           aspect="4/5"
           sizes="(min-width: 1200px) 50vw, 100vw"
         />

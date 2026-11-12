@@ -37,7 +37,14 @@ export function ProjectFAQ({ items }: { items: ProjectFAQItem[] }) {
                 </button>
                 <div className={cn("grid transition-[grid-template-rows] duration-420", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                   <div className="overflow-hidden">
-                    <p className="max-w-prose pb-6 whitespace-pre-line text-body text-sg-grey-1">{item.answer}</p>
+                    <p className="max-w-prose pb-4 whitespace-pre-line text-body text-sg-grey-1">{item.answer}</p>
+                    {item.bullets ? (
+                      <ul className="max-w-prose list-disc pb-6 pl-5 text-body text-sg-grey-1">
+                        {item.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                 </div>
               </div>
