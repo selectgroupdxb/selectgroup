@@ -25,12 +25,12 @@ const ITEMS_PER_PAGE = 4;
 // The signed-off design curates "Available" by hand rather than deriving it
 // from the off-plan filter (which would also surface sold-out-but-tagged
 // items like Nautica) — matched here by name against `developments`.
-const AVAILABLE_NAMES = ["Six Senses Residences Dubai Marina", "Artistry Residences"];
+const AVAILABLE_NAMES = ["Six Senses Residences Dubai Marina", "Artistry One Residences"];
 
 // "Completed" leads with this exact curated set (matching the signed-off
 // page 1) before falling back to the rest of the completed-tagged
 // developments for subsequent pages.
-const COMPLETED_HEAD_NAMES = ["Six Senses Residences The Palm", "Peninsula Four", "The EDGE", "Jumeirah Living Business Bay"];
+const COMPLETED_HEAD_NAMES = ["Six Senses Residences The Palm", "Peninsula Four, The Plaza", "The EDGE", "Jumeirah Living Business Bay"];
 
 function byNames(names: string[]) {
   return names
@@ -41,24 +41,20 @@ function byNames(names: string[]) {
 /**
  * Bento grid — a fixed 6-column / 2-row cell system lifted directly from the
  * signed-off design file, not a generic "feature + compact tiles" guess.
- * Column/row spans differ by how many items are actually on the page, so a
- * 2-item page reads as two equal cards, a 3-item page gives the feature 1/3
- * width with the other two at 2/3 width stacked beside it, and a 4-item page
- * adds a third slot plus a wide card underneath.
+ * Column/row spans differ by how many items are actually on the page: a
+ * 2-item page reads as two equal cards, a 3-item page is now also three equal
+ * (tall) cards — same shape as the single-feature card — and a 4-item page
+ * keeps the feature-plus-three-compact layout.
  */
 function containerClass(total: number) {
   if (total <= 1) return "grid-cols-1 auto-rows-[360px] desktop:auto-rows-[540px]";
   if (total === 2) return "grid-cols-1 tablet:grid-cols-2 auto-rows-[360px] desktop:auto-rows-[540px]";
+  if (total === 3) return "grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 auto-rows-[360px] desktop:auto-rows-[540px]";
   return "grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-6 auto-rows-[360px] desktop:auto-rows-[260px]";
 }
 
 function itemClass(index: number, total: number) {
-  if (total <= 2) return "";
-  if (total === 3) {
-    if (index === 0) return "desktop:[grid-column:1/3] desktop:[grid-row:1/3]";
-    if (index === 1) return "desktop:[grid-column:3/7] desktop:[grid-row:1/2]";
-    return "desktop:[grid-column:3/7] desktop:[grid-row:2/3]";
-  }
+  if (total <= 3) return "";
   // total === 4
   if (index === 0) return "desktop:[grid-column:1/3] desktop:[grid-row:1/3]";
   if (index === 1) return "desktop:[grid-column:3/5] desktop:[grid-row:1/2]";
@@ -67,7 +63,7 @@ function itemClass(index: number, total: number) {
 }
 
 function DevelopmentCard({ item, index, total }: { item: Development; index: number; total: number }) {
-  const isFeature = total >= 3 && index === 0;
+  const isFeature = total === 4 && index === 0;
   return (
     <Link
       href={`/developments/${item.slug}`}
@@ -78,6 +74,7 @@ function DevelopmentCard({ item, index, total }: { item: Development; index: num
         src={item.image}
         alt={item.name}
         sizes={isFeature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+        objectPosition="top"
         className="absolute inset-0 transition-transform duration-600 group-hover:scale-[1.04]"
       />
       <div

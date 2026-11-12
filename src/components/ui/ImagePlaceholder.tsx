@@ -13,6 +13,8 @@ type ImagePlaceholderProps = {
   alt?: string;
   sizes?: string;
   priority?: boolean;
+  /** CSS object-position, e.g. "top" to keep a tall building's top in frame. Defaults to center. */
+  objectPosition?: string;
 };
 
 /**
@@ -21,7 +23,7 @@ type ImagePlaceholderProps = {
  * obvious rather than looking content-complete. Same component either way
  * so call sites don't need to branch themselves as photos land.
  */
-export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, priority }: ImagePlaceholderProps) {
+export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, priority, objectPosition }: ImagePlaceholderProps) {
   if (src) {
     return (
       <div className={cn("relative h-full w-full overflow-hidden bg-sg-grey-5", className)} style={aspect ? { aspectRatio: aspect } : undefined}>
@@ -32,6 +34,7 @@ export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, pr
           sizes={sizes ?? "100vw"}
           priority={priority}
           className="object-cover"
+          style={objectPosition ? { objectPosition } : undefined}
         />
       </div>
     );

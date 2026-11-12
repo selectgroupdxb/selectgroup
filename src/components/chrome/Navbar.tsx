@@ -15,9 +15,15 @@ import { navGroups, utilityLinks, type NavGroup } from "./nav-data";
 
 const CLOSE_DELAY_MS = 150;
 
+// Routes whose hero sits directly behind the nav (dark photo + scrim) get the
+// same transparent-until-scrolled treatment as the homepage. Every other
+// route starts solid, since a transparent nav over a plain white page top
+// would be unreadable.
+const TRANSPARENT_HERO_ROUTES = ["/", "/developments"];
+
 export function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const hasTransparentHero = TRANSPARENT_HERO_ROUTES.includes(pathname);
 
   const [scrolled, setScrolled] = useState(false);
   const [openPanel, setOpenPanel] = useState<NavGroup["key"] | null>(null);
@@ -25,8 +31,7 @@ export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Interior routes always start solid; the homepage is transparent until scrolled.
-  const solid = scrolled || !isHome;
+  const solid = scrolled || !hasTransparentHero;
 
   useEffect(() => {
     function onScroll() {
@@ -178,7 +183,7 @@ export function Navbar() {
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
-      <AskSelect visible={!isHome || scrolled} />
+      <AskSelect visible={!hasTransparentHero || scrolled} />
     </>
   );
 }

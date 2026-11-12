@@ -24,7 +24,7 @@ export function Awards() {
         className="absolute inset-0"
       />
       <div className="absolute inset-0 bg-sg-black/88" aria-hidden />
-      <div className="relative grid gap-10 px-5 tablet:px-10 desktop:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] desktop:gap-16 desktop:px-16">
+      <div className="relative grid gap-10 px-5 tablet:px-10 desktop:grid-cols-[0.4fr_1.8fr] desktop:gap-16 desktop:px-16">
         <Reveal className="flex flex-col gap-5">
           <Eyebrow tone="inverse">Recognition</Eyebrow>
           <h2 className="text-h2 text-white">Industry Awards</h2>
