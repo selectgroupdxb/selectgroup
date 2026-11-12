@@ -21,9 +21,13 @@ const CLOSE_DELAY_MS = 150;
 // would be unreadable.
 const TRANSPARENT_HERO_ROUTES = ["/", "/developments"];
 
+function hasTransparentHeroFor(pathname: string) {
+  return TRANSPARENT_HERO_ROUTES.includes(pathname) || pathname.startsWith("/developments/");
+}
+
 export function Navbar() {
   const pathname = usePathname();
-  const hasTransparentHero = TRANSPARENT_HERO_ROUTES.includes(pathname);
+  const hasTransparentHero = hasTransparentHeroFor(pathname);
 
   const [scrolled, setScrolled] = useState(false);
   const [openPanel, setOpenPanel] = useState<NavGroup["key"] | null>(null);

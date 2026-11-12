@@ -25,7 +25,7 @@ export function ProjectHero({ development, tagline, body }: { development: Devel
         <p className="mt-4 max-w-prose text-body-lg font-light text-white/82">{body}</p>
         <div className="mt-7 flex flex-wrap items-center gap-4">
           <span className="text-h3 text-white">{development.price}</span>
-          <Button href="#enquire" variant="filled">
+          <Button href="/contact" variant="filled">
             Enquire
           </Button>
         </div>
