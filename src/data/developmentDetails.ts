@@ -12,17 +12,19 @@
  * every other development falls back to placeholder copy in the prototype,
  * so only this one entry is populated here.
  *
- * Image fields point at the exact filenames the prototype itself references
- * (e.g. `ssdm-tower-night.avif`), under `public/images/homepage/`. Most of
- * those files don't exist in the repo yet — `ImagePlaceholder` renders a
- * labelled placeholder until they're dropped in with these exact names, at
- * which point they'll pick up automatically with no further code change.
- * The construction-progress quarter photos and location map are a deliberate
+ * Real per-development photography (supplied directly by the project owner,
+ * not from the prototype) lives under `public/images/developments/<Name>/`
+ * — see `SSDM_IMG` below. Fields still pointing at a prototype-ref filename
+ * under `public/images/homepage/` (e.g. `ssdm-experience-spa.avif`) haven't
+ * been supplied yet; `ImagePlaceholder` renders a labelled placeholder until
+ * they land, with no further code change needed once they do. The
+ * construction-progress quarter photos and location map are a deliberate
  * exception, left `undefined`: the prototype itself reuses unrelated stock/
  * homepage imagery for those, so there's no real filename to point at yet.
  */
 
 const IMG = "/images/homepage/";
+const SSDM_IMG = "/images/developments/Six Senses Dubai Marina/";
 
 export type TwoColBlock = {
   eyebrow: string;
@@ -117,7 +119,7 @@ export interface DevelopmentDetail {
 export const developmentDetails: Record<string, DevelopmentDetail> = {
   "six-senses-residences-dubai-marina": {
     hero: {
-      image: `${IMG}ssdm-development-featured.jpg`, // prototype ref: hp-hero-ssdm.avif — not yet supplied, reusing the real photo already in the repo
+      image: `${SSDM_IMG}six-senses-marina-development-hero.jpg`,
       heroSub: "Dubai Marina · The tallest residential tower in the world",
       brandName: "Six Senses",
       brandSub: "RESIDENCES",
@@ -138,7 +140,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theTower: {
       eyebrow: "The Tower",
       title: "A Landmark On The Marina",
-      image: `${IMG}ssdm-tower-night.avif`,
+      image: `${SSDM_IMG}six-senses-landmark-on-the-marina.jpg`,
       paragraphs: [
         "At 122 storeys and rising approximately 517 metres above Dubai Marina, Six Senses Residences Dubai Marina is designed to become a defining presence on the city's skyline. The tower takes a deliberately slender and elegant approach.",
         "Its form is shaped as much by its setting as by its scale. The tower's dual-aspect orientation opens views north towards Palm Jumeirah and the Arabian Gulf, and south towards Emirates Golf Club and Emirates Hills.",
@@ -147,7 +149,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theResidences: {
       eyebrow: "The Residences",
       title: "Luxury Designed Around Wellness",
-      image: `${IMG}ssdm-residences-gym.avif`,
+      image: `${SSDM_IMG}ssdm-luxury-designed-around-wellness.jpg`,
       alt: "Wellness and fitness level, Six Senses Residences Dubai Marina",
       paragraphs: [
         "Six Senses Residences Dubai Marina brings a new perspective to luxury living in Dubai. The residences combine Select Group's commitment to quality and thoughtful design with the Six Senses approach to wellness.",
@@ -201,7 +203,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     },
     neighbourhood: {
       title: "Dubai Marina",
-      image: `${IMG}ssdm-area-marina.avif`,
+      image: `${SSDM_IMG}neighbourhood-dubai-marina.jpg`,
       paragraphs: [
         "Six Senses Residences Dubai Marina brings a new perspective to luxury waterfront living in one of Dubai's most established districts. Dubai Marina is a three-kilometre canal lined with towers, promenade retail and moorings, bounded by Jumeirah Beach Residence and the beach on one side and Sheikh Zayed Road on the other. The district is walkable in a way little of Dubai is, and the tower sits at its northern gateway.",
         "Select Group has developed nine towers in the district since 2005, including Marina Gate, No.9 and Studio One, giving the group an unusually long view of how Dubai Marina lives, lets and resells. That experience, combined with the Six Senses approach to wellness and hospitality, brings a considered new dimension to life on the Marina.",
