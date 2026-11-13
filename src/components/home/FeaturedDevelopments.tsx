@@ -25,7 +25,7 @@ const ITEMS_PER_PAGE = 4;
 // The signed-off design curates "Available" by hand rather than deriving it
 // from the off-plan filter (which would also surface sold-out-but-tagged
 // items like Nautica) — matched here by name against `developments`.
-const AVAILABLE_NAMES = ["Six Senses Residences Dubai Marina", "Artistry One Residences"];
+const AVAILABLE_NAMES = ["Six Senses Residences Dubai Marina", "Artistry One Residences", "Artistry Two Residences"];
 
 // "Completed" leads with this exact curated set (matching the signed-off
 // page 1) before falling back to the rest of the completed-tagged
