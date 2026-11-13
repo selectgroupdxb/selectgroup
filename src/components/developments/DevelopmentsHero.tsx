@@ -12,7 +12,11 @@ export function DevelopmentsHero() {
         priority
         className="absolute inset-0"
       />
-      <div className="absolute inset-0" style={{ background: "var(--scrim-hero-slide-linear)" }} aria-hidden />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom, rgba(34,34,34,.22) 0%, rgba(34,34,34,.12) 32%, rgba(34,34,34,.84) 100%)" }}
+        aria-hidden
+      />
       <div className="relative w-full px-5 pb-12 tablet:px-10 desktop:px-16">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Developments" }]} />
         <h1 className="mt-3 max-w-[20ch] text-[44px] leading-[1.1] text-white uppercase">Off Plan Properties In Dubai</h1>
