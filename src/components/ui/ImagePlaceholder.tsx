@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
@@ -21,10 +24,14 @@ type ImagePlaceholderProps = {
  * Renders real photography when `src` is supplied, otherwise a neutral
  * stand-in with a visible caption — so every slot still without a photo is
  * obvious rather than looking content-complete. Same component either way
- * so call sites don't need to branch themselves as photos land.
+ * so call sites don't need to branch themselves as photos land. Also falls
+ * back to the placeholder if `src` 404s (e.g. a filename wired ahead of the
+ * real file landing), rather than showing a broken image.
  */
 export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, priority, objectPosition }: ImagePlaceholderProps) {
-  if (src) {
+  const [errored, setErrored] = useState(false);
+
+  if (src && !errored) {
     return (
       <div className={cn("relative h-full w-full overflow-hidden bg-sg-grey-5", className)} style={aspect ? { aspectRatio: aspect } : undefined}>
         <Image
@@ -35,6 +42,7 @@ export function ImagePlaceholder({ label, className, aspect, src, alt, sizes, pr
           priority={priority}
           className="object-cover"
           style={objectPosition ? { objectPosition } : undefined}
+          onError={() => setErrored(true)}
         />
       </div>
     );

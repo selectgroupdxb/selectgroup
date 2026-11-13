@@ -12,12 +12,14 @@
  * every other development falls back to placeholder copy in the prototype,
  * so only this one entry is populated here.
  *
- * Image fields are left `undefined` where the prototype references an asset
- * (noted in the trailing comment) that does not yet exist in
- * `public/images/homepage/` — the prototype's own asset references resolve
- * against its design tool's hosting, not anything exported into this repo.
- * `ImagePlaceholder` renders a labelled placeholder until the real files are
- * supplied, rather than guessing or reusing an unrelated photo.
+ * Image fields point at the exact filenames the prototype itself references
+ * (e.g. `ssdm-tower-night.avif`), under `public/images/homepage/`. Most of
+ * those files don't exist in the repo yet — `ImagePlaceholder` renders a
+ * labelled placeholder until they're dropped in with these exact names, at
+ * which point they'll pick up automatically with no further code change.
+ * The construction-progress quarter photos and location map are a deliberate
+ * exception, left `undefined`: the prototype itself reuses unrelated stock/
+ * homepage imagery for those, so there's no real filename to point at yet.
  */
 
 const IMG = "/images/homepage/";
@@ -136,7 +138,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theTower: {
       eyebrow: "The Tower",
       title: "A Landmark On The Marina",
-      image: undefined, // prototype ref: ssdm-tower-night.avif — not yet supplied
+      image: `${IMG}ssdm-tower-night.avif`,
       paragraphs: [
         "At 122 storeys and rising approximately 517 metres above Dubai Marina, Six Senses Residences Dubai Marina is designed to become a defining presence on the city's skyline. The tower takes a deliberately slender and elegant approach.",
         "Its form is shaped as much by its setting as by its scale. The tower's dual-aspect orientation opens views north towards Palm Jumeirah and the Arabian Gulf, and south towards Emirates Golf Club and Emirates Hills.",
@@ -145,7 +147,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theResidences: {
       eyebrow: "The Residences",
       title: "Luxury Designed Around Wellness",
-      image: undefined, // prototype ref: ssdm-residences-gym.avif — not yet supplied
+      image: `${IMG}ssdm-residences-gym.avif`,
       alt: "Wellness and fitness level, Six Senses Residences Dubai Marina",
       paragraphs: [
         "Six Senses Residences Dubai Marina brings a new perspective to luxury living in Dubai. The residences combine Select Group's commitment to quality and thoughtful design with the Six Senses approach to wellness.",
@@ -170,7 +172,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
       { label: "Sky Infinity Pool", level: "Level 60" },
     ],
     experience: {
-      image: undefined, // prototype ref: ssdm-experience-spa.avif — not yet supplied
+      image: `${IMG}ssdm-experience-spa.avif`,
       eyebrow: "The Six Senses Experience",
       title: "Wellness As An Operating Standard",
       body: "Six Senses operates the building, not just the brand on it. Residents hold membership of the Six Senses Place club, and the wellness, dining and social programming continues for the life of the tower rather than ending at handover.",
@@ -199,7 +201,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     },
     neighbourhood: {
       title: "Dubai Marina",
-      image: undefined, // prototype ref: ssdm-area-marina.avif — not yet supplied
+      image: `${IMG}ssdm-area-marina.avif`,
       paragraphs: [
         "Six Senses Residences Dubai Marina brings a new perspective to luxury waterfront living in one of Dubai's most established districts. Dubai Marina is a three-kilometre canal lined with towers, promenade retail and moorings, bounded by Jumeirah Beach Residence and the beach on one side and Sheikh Zayed Road on the other. The district is walkable in a way little of Dubai is, and the tower sits at its northern gateway.",
         "Select Group has developed nine towers in the district since 2005, including Marina Gate, No.9 and Studio One, giving the group an unusually long view of how Dubai Marina lives, lets and resells. That experience, combined with the Six Senses approach to wellness and hospitality, brings a considered new dimension to life on the Marina.",
@@ -280,12 +282,12 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     },
     enquireImage: `${IMG}six-senses-marina-hp-hero.jpg`, // prototype ref: six-senses-marina.jpg
     gallery: [
-      { image: undefined, category: "exterior", caption: "The tower from the north, looking across Palm Jumeirah" }, // prototype ref: hp-hero-ssdm.avif
-      { image: undefined, category: "exterior", caption: "Dubai Marina at dusk, the tower at the northern gateway" }, // prototype ref: ssdm-tower-night.avif
-      { image: undefined, category: "exterior", caption: "Upper levels above early morning cloud" }, // prototype ref: hp-awards-bg.avif
+      { image: `${IMG}hp-hero-ssdm.avif`, category: "exterior", caption: "The tower from the north, looking across Palm Jumeirah" },
+      { image: `${IMG}ssdm-tower-night.avif`, category: "exterior", caption: "Dubai Marina at dusk, the tower at the northern gateway" },
+      { image: `${IMG}hp-awards-bg.avif`, category: "exterior", caption: "Upper levels above early morning cloud" },
       { image: `${IMG}six-senses-marina-hp-hero.jpg`, category: "exterior", caption: "Approach from the marina promenade" },
-      { image: undefined, category: "residences", caption: "Living space with dual-aspect glazing" }, // prototype ref: hp-branded-ssdm.avif
-      { image: undefined, category: "amenities", caption: "Fitness and movement studio · Level 60" }, // prototype ref: ssdm-residences-gym.avif
+      { image: `${IMG}hp-branded-ssdm.avif`, category: "residences", caption: "Living space with dual-aspect glazing" },
+      { image: `${IMG}ssdm-residences-gym.avif`, category: "amenities", caption: "Fitness and movement studio · Level 60" },
     ],
     faq: [
       {

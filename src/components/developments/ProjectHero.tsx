@@ -34,10 +34,10 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Developments", href: "/developments" }, { label: development.name }]} />
         </div>
 
-        <div className="absolute top-8 right-5 hidden max-w-[240px] rounded-sm border border-white/24 bg-black/42 p-5 backdrop-blur-md tablet:right-10 tablet:block desktop:right-16">
-          <p className="text-[10px] font-bold tracking-[0.2em] text-white/70 uppercase">{hero.priceLabel}</p>
-          <p className="mt-1 text-h3 text-white">{hero.price}</p>
-          <p className="mt-1 text-body-sm text-white/70">{hero.priceNote}</p>
+        <div className="absolute top-[140px] right-5 hidden max-w-[330px] border border-white/34 bg-black/42 px-8 py-7 text-right backdrop-blur-md tablet:right-10 tablet:block desktop:right-16">
+          <p className="text-[10px] font-bold tracking-[0.2em] text-white/78 uppercase">{hero.priceLabel}</p>
+          <p className="mt-[18px] text-[40px] leading-none font-display tracking-[0.02em] text-white tablet:text-[48px] desktop:text-[56px]">{hero.price}</p>
+          <p className="mt-[18px] border-t border-white/28 pt-4 text-[12px] font-light text-white/70">{hero.priceNote}</p>
         </div>
 
         <div className="relative w-full px-5 pb-16 tablet:px-10 desktop:px-16">
@@ -59,10 +59,14 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
         </div>
       </section>
 
-      <section className="bg-sg-white px-5 py-14 tablet:px-10 tablet:py-18 desktop:px-16 desktop:py-20">
-        <Eyebrow>{hero.introEyebrow}</Eyebrow>
-        <h1 className="mt-3 max-w-[22ch] text-h1 text-sg-black">{development.name}</h1>
-        <p className="mt-6 max-w-prose text-body-lg font-light text-sg-grey-1">{hero.introBody}</p>
+      <section className="bg-sg-white px-5 pt-14 tablet:px-10 tablet:pt-18 desktop:px-16 desktop:pt-20">
+        <div className="grid gap-10 desktop:grid-cols-2 desktop:gap-20">
+          <div>
+            <Eyebrow>{hero.introEyebrow}</Eyebrow>
+            <h1 className="mt-3 max-w-[22ch] text-h1 text-sg-black">{development.name}</h1>
+          </div>
+          <p className="max-w-prose text-body-lg font-light text-sg-grey-1">{hero.introBody}</p>
+        </div>
       </section>
     </>
   );

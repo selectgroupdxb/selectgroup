@@ -21,6 +21,11 @@ export function StickyEnquiryBar({ name, heroSub, priceLabel, price, priceNote, 
 
   useEffect(() => {
     function onScroll() {
+      const footer = document.querySelector("footer");
+      if (footer && footer.getBoundingClientRect().top <= window.innerHeight) {
+        setVisible(false);
+        return;
+      }
       const el = document.getElementById(triggerId);
       if (!el) {
         setVisible(window.scrollY > 1000);
