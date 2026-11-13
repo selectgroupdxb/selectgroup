@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
 
-export type District = { name: string; image?: string };
+export type District = { name: string; image?: string; description?: string };
 
 export function FiveDistricts({ districts }: { districts: District[] }) {
   const [index, setIndex] = useState(0);
@@ -44,6 +44,9 @@ export function FiveDistricts({ districts }: { districts: District[] }) {
               );
             })}
           </div>
+          {current.description ? (
+            <p className="mt-6 max-w-[48ch] text-body-sm text-sg-grey-1">{current.description}</p>
+          ) : null}
           <div className="mt-8 flex gap-3">
             <button
               type="button"
