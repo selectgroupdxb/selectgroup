@@ -17,6 +17,8 @@
  * mechanically derived (kebab-case of the name) for routing purposes only.
  */
 
+import { developmentDetails } from "./developmentDetails";
+
 const IMG = "/images/homepage/";
 
 // ---------------------------------------------------------------------------
@@ -80,16 +82,13 @@ export const developments: Development[] = [
   { name: "Jumeirah Living Business Bay", slug: "jumeirah-living-business-bay", location: "Business Bay", status: "Completed", cats: ["completed", "branded"], types: "1–4 bedrooms", bedroomsMin: 1, bedroomsMax: 4, price: "Sold out", units: "520 residences", handover: "Handed over", blurb: "Jumeirah Living's first standalone residential address, overlooking the Dubai Water Canal.", lat: 25.183194, lng: 55.265162, image: `${IMG}jlbb-development-featured-wide.jpg` },
   { name: "Studio One", slug: "studio-one", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "Studio–2 bedrooms", bedroomsMin: 0, bedroomsMax: 2, price: "Sold out", units: "404 residences", handover: "Handed over", blurb: "Compact studio and one-bedroom living on the edge of Dubai Marina.", lat: 25.068726, lng: 55.129009, image: `${IMG}studio-one-past-developments.jpg` },
   { name: "No.9 Residences", slug: "no-9", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–3 bedrooms", bedroomsMin: 1, bedroomsMax: 3, price: "Sold out", units: "227 residences", handover: "Handed over", blurb: "A slender residential tower fronting the Dubai Marina promenade.", lat: 25.083401, lng: 55.144731, image: `${IMG}no9-past-developments.jpg` },
-  // Split from a single combined entry — live site indexes these as two
-  // separate pages (the-residences-at-marina-gate-i / -ii) with real,
-  // separately-tracked traffic and conversions. Unit counts come from the
-  // existing pastDevelopments entries below ("Marina Gate 1" / "Marina Gate
-  // II"), not invented: 415 residences / 51 floors and 535 residences / 64
-  // floors respectively.
-  { name: "The Residences at Marina Gate I", slug: "the-residences-at-marina-gate-i", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–4 bedrooms", bedroomsMin: 1, bedroomsMax: 4, price: "Sold out", units: "415 residences", handover: "Handed over", blurb: "Part of the three-tower gateway to Dubai Marina.", lat: 25.087000, lng: 55.147485, image: `${IMG}marina-gate-1-past-developments.jpg` },
-  { name: "The Residences at Marina Gate II", slug: "the-residences-at-marina-gate-ii", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–4 bedrooms", bedroomsMin: 1, bedroomsMax: 4, price: "Sold out", units: "535 residences", handover: "Handed over", blurb: "Part of the three-tower gateway to Dubai Marina.", lat: 25.087000, lng: 55.147485, image: `${IMG}marina-gate-2-past-developments.jpg` },
+  // Previously split into Marina Gate I / II (the live site indexes them as
+  // two separate pages) — recombined into one per explicit instruction.
+  // Units sum the two real per-tower counts from pastDevelopments below
+  // ("Marina Gate 1" 415 + "Marina Gate II" 535 = 950).
+  { name: "The Residences at Marina Gate", slug: "the-residences-at-marina-gate", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "1–4 bedrooms", bedroomsMin: 1, bedroomsMax: 4, price: "Sold out", units: "950 residences across two towers", handover: "Handed over", blurb: "Part of the three-tower gateway to Dubai Marina.", lat: 25.087000, lng: 55.147485, image: `${IMG}marina-gate-1-past-developments.jpg` },
   { name: "Jumeirah Living Marina Gate", slug: "jumeirah-living-marina-gate", location: "Dubai Marina", status: "Branded", cats: ["completed", "branded"], types: "2–4 bedrooms", bedroomsMin: 2, bedroomsMax: 4, price: "Sold out", units: "389 residences", handover: "Handed over", blurb: "Serviced branded residences operated by Jumeirah Living at Marina Gate.", lat: 25.087629, lng: 55.146463, image: `${IMG}jlmg-development-featured-wide.jpg` },
-  { name: "Nautica", slug: "nautica", location: "Dubai Maritime City", status: "Off Plan", cats: ["offplan"], types: "1–2 bedrooms", bedroomsMin: 1, bedroomsMax: 2, price: "Sold out", units: "Two towers, Nautica One and Nautica Two", handover: "Completion 2026", blurb: "Pulsating an Eclectic Nautical Vibe Through its Waterfront Location, Architecture and Design.", lat: 25.263190, lng: 55.269781, image: `${IMG}nautica-past-developments.jpg` },
+  { name: "Nautica", slug: "nautica", location: "Dubai Maritime City", status: "Completed", cats: ["completed"], types: "1–2 bedrooms", bedroomsMin: 1, bedroomsMax: 2, price: "Sold out", units: "Two towers, Nautica One and Nautica Two", handover: "Handed over", blurb: "Pulsating an Eclectic Nautical Vibe Through its Waterfront Location, Architecture and Design.", lat: 25.263190, lng: 55.269781, image: `${IMG}nautica-past-developments.jpg` },
   { name: "Peninsula One", slug: "peninsula-one", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", bedroomsMin: 0, bedroomsMax: 3, price: "Sold out", units: "70 simplex residences", handover: "Handed over", blurb: "The Gateway to Dubai's Most Spectacular Waterfront Community", lat: 25.184859, lng: 55.266631, image: `${IMG}peninsula-one-past-development.jpg` },
   { name: "Peninsula Five", slug: "peninsula-five-the-signature-collection", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–4 bedrooms", bedroomsMin: 0, bedroomsMax: 4, price: "Sold out", units: "60 duplex residences", handover: "Handed over", blurb: "A Superior and Sophisticated Series of Luxurious Residences.", lat: 25.183553, lng: 55.266428, image: `${IMG}peninsula-five-past-development.jpg` },
   { name: "15 Northside", slug: "15-northside", location: "Business Bay", status: "Completed", cats: ["completed"], types: "Studio–4 bedrooms", bedroomsMin: 0, bedroomsMax: 4, price: "Sold out", units: "349 residences", handover: "Handed over", blurb: "Bringing The Select Group Standard To Business Bay", lat: 25.186513, lng: 55.286706, image: `${IMG}15-northside-past-development.jpg` },
@@ -104,6 +103,27 @@ export const developments: Development[] = [
   { name: "Yacht Bay", slug: "yacht-bay", location: "Dubai Marina", status: "Completed", cats: ["completed"], types: "Studio–3 bedrooms", bedroomsMin: 0, bedroomsMax: 3, price: "Sold out", units: "175 residences", handover: "Handed over", blurb: "Premium Boating Themed Residences", lat: 25.071562, lng: 55.136853, image: `${IMG}yacht-bay-past-development.jpg` },
   { name: "Pacific", slug: "pacific", location: "Ras Al Khaimah", status: "Completed", cats: ["completed"], types: "Studio–2 bedrooms", bedroomsMin: 0, bedroomsMax: 2, price: "Sold out", units: "1,376 residences", handover: "Handed over", blurb: "Breathtaking Island Apartments on Al Marjan Island", lat: 25.687225, lng: 55.733225, image: `${IMG}pacific-past-developments.jpg` },
 ];
+
+/**
+ * RULE: everywhere a development's image is shown outside its own project
+ * page (homepage cards, nav mega-menu cards, the dev-index grid), use that
+ * project page's own hero photo if one exists, falling back to `image` only
+ * for developments that don't have a project page yet. This keeps a single
+ * source of truth per development instead of two photos drifting apart (as
+ * Artistry and Six Senses had before this rule existed).
+ *
+ * CMS note: when this moves to Sanity, a development's card image should be
+ * a computed/derived field (project page hero → fallback card image), not a
+ * separately-editable one — so editors can't recreate this drift. Featured
+ * Developments and Branded Developments should be editor-curated tabs (an
+ * explicit "show in Featured" / "show in Branded" toggle per development,
+ * matching today's `featured` flag and the homepage's hand-picked Available/
+ * Branded name lists); every other tab (Completed, Off Plan, the dev-index
+ * grid) should auto-populate from status/cats — no manual curation needed.
+ */
+export function getDevelopmentImage(d: Development): string | undefined {
+  return developmentDetails[d.slug]?.hero.image ?? d.image;
+}
 
 // ---------------------------------------------------------------------------
 // 2. Past Developments (homepage scroller, "Delivered across Dubai since 2007")

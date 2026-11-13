@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import type { Development } from "@/data/homepage";
+import { getDevelopmentImage, type Development } from "@/data/homepage";
 
 /**
  * Uniform dev-index grid card — visually derived from the homepage's
@@ -14,7 +14,7 @@ export function DevelopmentGridCard({ item }: { item: Development }) {
     <Link href={`/developments/${item.slug}`} className="group relative block aspect-[6/5] overflow-hidden">
       <ImagePlaceholder
         label={item.name}
-        src={item.image}
+        src={getDevelopmentImage(item)}
         alt={item.name}
         sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
         objectPosition={item.imagePosition}

@@ -15,8 +15,12 @@ export function SixSensesExperience({ image, eyebrow, title, body, pillars }: Ex
   return (
     <section className="relative overflow-hidden bg-sg-black">
       <ImagePlaceholder label={title} src={image} sizes="100vw" className="absolute inset-0" />
-      <div className="absolute inset-0 bg-sg-black/78" aria-hidden />
-      <Section tone="black" padding="none" className="relative py-18 tablet:py-24 desktop:py-28">
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(105deg, rgba(34,34,34,.72) 0%, rgba(34,34,34,.42) 46%, rgba(34,34,34,.2) 100%)" }}
+        aria-hidden
+      />
+      <Section tone="black" padding="none" className="relative bg-transparent py-18 tablet:py-24 desktop:py-28">
         <div className="grid gap-10 desktop:grid-cols-2 desktop:gap-18">
           <div className="border-t border-white/18 desktop:order-1">
             {pillars.map((pillar) => (

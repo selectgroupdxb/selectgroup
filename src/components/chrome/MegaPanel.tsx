@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { developments, verticals } from "@/data/homepage";
+import { developments, getDevelopmentImage, verticals } from "@/data/homepage";
 import type { NavGroup } from "./nav-data";
 
 type MegaPanelProps = {
@@ -34,7 +34,7 @@ function developmentCards(cat: DevTabKey): PanelCard[] {
   return developments
     .filter((d) => d.cats.includes(cat))
     .slice(0, 4)
-    .map((d) => ({ key: d.slug, href: `/developments/${d.slug}`, image: d.image, title: d.name, meta: d.location, badge: d.price }));
+    .map((d) => ({ key: d.slug, href: `/developments/${d.slug}`, image: getDevelopmentImage(d), title: d.name, meta: d.location, badge: d.price }));
 }
 
 const INVESTMENT_NOTES: Record<string, string> = {

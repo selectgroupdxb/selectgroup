@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { developments, type Development, type DevelopmentCategory } from "@/data/homepage";
+import { developments, getDevelopmentImage, type Development, type DevelopmentCategory } from "@/data/homepage";
 
 type TabKey = "featured" | "available" | DevelopmentCategory;
 
@@ -71,7 +71,7 @@ function DevelopmentCard({ item, index, total }: { item: Development; index: num
     >
       <ImagePlaceholder
         label={item.name}
-        src={item.image}
+        src={getDevelopmentImage(item)}
         alt={item.name}
         sizes={isFeature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
         objectPosition="top"

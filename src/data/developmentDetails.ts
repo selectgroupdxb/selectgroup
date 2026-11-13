@@ -26,6 +26,7 @@
 const IMG = "/images/homepage/";
 const SSDM_IMG = "/images/developments/Six Senses Dubai Marina/";
 const ART_IMG = "/images/developments/Artistry Residences/";
+const DEV_IMG = "/images/developments/";
 
 export type TwoColBlock = {
   eyebrow: string;
@@ -83,13 +84,15 @@ export interface DevelopmentDetail {
     introEyebrow: string;
     introBody: string;
   };
-  keyFacts: KeyFact[];
+  /** Omitted for "minimal" pages (no Key Facts / dark band straight after The Tower). */
+  keyFacts?: KeyFact[];
   theTower: TwoColBlock;
   /** Only shown for multi-tower developments (e.g. Artistry One/Two combined into one listing). */
   twoTowers?: { intro: string; towers: Tower[] };
   theResidences: TwoColBlock;
-  amenitiesIntro: { title: string; body: string };
-  amenities: AmenityItem[];
+  /** Omitted together — "minimal" pages (Tower/Residences/Neighbourhood/Location/Select Difference only) have no real amenity data. */
+  amenitiesIntro?: { title: string; body: string };
+  amenities?: AmenityItem[];
   /** Only shown for branded-residence developments (`cats.includes("branded")`). */
   experience?: {
     image?: string;
@@ -120,11 +123,74 @@ export interface DevelopmentDetail {
     quarters: ConstructionQuarter[];
   };
   enquireImage?: string;
+  /**
+   * Set for developments built with only The Tower / The Residences /
+   * Neighbourhood / Location & Connectivity / The Select Difference — no
+   * Enquiry form, sticky bar, or FAQ (there's no real content for them yet).
+   */
+  minimal?: boolean;
   /** Omitted where the source has no real gallery photos yet (just a single placeholder item). */
   gallery?: GalleryItem[];
   /** Omitted where the source's FAQ answers are all placeholder text. */
   faq?: ProjectFAQItem[];
 }
+
+/**
+ * Builds a "minimal" page (The Tower / The Residences / Neighbourhood /
+ * Location & Connectivity / The Select Difference only — no Key Facts,
+ * Amenities, Enquiry form, sticky bar, or FAQ) for developments that have a
+ * real hero photo but no rich prototype copy. Every string here is derived
+ * from the development's own already-real fields (its existing card blurb,
+ * unit types, location) or is a plain factual one-liner about the district
+ * — nothing is invented. This doubles as the auto-population logic noted
+ * for the future CMS: feed it a development + its hero photo and it
+ * produces a complete, honest page with no manual content entry required.
+ */
+function minimalDetail(opts: {
+  heroImage: string;
+  location: string;
+  types: string;
+  units: string;
+  price: string;
+  blurb: string;
+  neighbourhoodParagraph: string;
+}): DevelopmentDetail {
+  const hasPrice = /\d/.test(opts.price);
+  return {
+    hero: {
+      image: opts.heroImage,
+      heroSub: `${opts.location} · ${opts.types}`,
+      price: hasPrice ? opts.price.replace(/^From\s+/i, "") : opts.price,
+      priceLabel: hasPrice ? "Starting From" : "Status",
+      priceNote: opts.units,
+      introEyebrow: opts.location,
+      introBody: opts.blurb,
+    },
+    theTower: {
+      eyebrow: "The Tower",
+      title: opts.blurb,
+      paragraphs: [`Comprising ${opts.units}, with ${opts.types.toLowerCase()}, in ${opts.location}.`],
+    },
+    theResidences: {
+      eyebrow: "The Residences",
+      title: opts.types,
+      paragraphs: [`${opts.units}, with ${opts.types.toLowerCase()}.`],
+    },
+    neighbourhood: {
+      title: opts.location,
+      paragraphs: [opts.neighbourhoodParagraph],
+    },
+    location: {
+      proximity: [],
+      mapNote: "Map artwork pending.",
+    },
+    minimal: true,
+  };
+}
+
+const MARINA_BLURB =
+  "Dubai Marina is a three-kilometre waterfront canal district in Dubai, lined with residential towers, marina berths and promenade retail.";
+const BUSINESS_BAY_BLURB = "Business Bay is a central Dubai business and residential district along the Dubai Water Canal.";
 
 export const developmentDetails: Record<string, DevelopmentDetail> = {
   "six-senses-residences-dubai-marina": {
@@ -185,7 +251,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
       { label: "Sky Infinity Pool", level: "Level 60" },
     ],
     experience: {
-      image: `${IMG}ssdm-experience-spa.avif`,
+      image: `${SSDM_IMG}six-senses-experience.jpg`,
       eyebrow: "The Six Senses Experience",
       title: "Wellness As An Operating Standard",
       body: "Six Senses operates the building, not just the brand on it. Residents hold membership of the Six Senses Place club, and the wellness, dining and social programming continues for the life of the tower rather than ending at handover.",
@@ -437,4 +503,133 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
       { image: `${ART_IMG}artistry-gallery-balcony.jpg`, category: "residences", caption: "Private balcony" },
     ],
   },
+
+  // Minimal pages: real hero photo, no rich prototype copy. See `minimalDetail`.
+  "pacific": minimalDetail({
+    heroImage: `${DEV_IMG}Pacific/pacific-development-hero.jpg`,
+    location: "Ras Al Khaimah",
+    types: "Studio–2 bedrooms",
+    units: "1,376 residences",
+    price: "Sold out",
+    blurb: "Breathtaking Island Apartments on Al Marjan Island",
+    neighbourhoodParagraph:
+      "Ras Al Khaimah is a northern emirate of the UAE; Pacific is located on Al Marjan Island, its waterfront island development.",
+  }),
+  "yacht-bay": minimalDetail({
+    heroImage: `${DEV_IMG}Yacht Bay/yacht-bay-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–3 bedrooms",
+    units: "175 residences",
+    price: "Sold out",
+    blurb: "Premium Boating Themed Residences",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "the-point": minimalDetail({
+    heroImage: `${DEV_IMG}The Point/the-point-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–4 bedrooms",
+    units: "193 residences",
+    price: "Sold out",
+    blurb: "A Waterside Development in a Prestigious Location",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "the-royal-oceanic": minimalDetail({
+    heroImage: `${DEV_IMG}Royal Oceanic/royal-oceanic-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–4 bedrooms",
+    units: "232 residences",
+    price: "Sold out",
+    blurb: "Occupying One of the Premier Locations in Dubai Marina",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "botanica": minimalDetail({
+    heroImage: `${DEV_IMG}Botanica/botanica-tower-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–2 bedrooms and penthouses",
+    units: "371 residences",
+    price: "Sold out",
+    blurb: "Dubai's Tropical Paradise Residence",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "the-torch": minimalDetail({
+    heroImage: `${DEV_IMG}Torch/torch-tower-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "1–3 bedrooms",
+    units: "682 residences",
+    price: "Sold out",
+    blurb: "The World's Tallest Residential Development of its Time",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "bay-central": minimalDetail({
+    heroImage: `${DEV_IMG}Bay Central/bay-central-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–3 bedrooms and penthouses",
+    units: "747 residences",
+    price: "Sold out",
+    blurb: "An Exclusive Waterfront Development of 3 Mixed-use Towers",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "west-avenue": minimalDetail({
+    heroImage: `${DEV_IMG}West Avenue/west-avenue-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–3 bedrooms",
+    units: "276 residences",
+    price: "Sold out",
+    blurb: "Stylish & Contemporary Residences in a Prime Location",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "mushrif-village": minimalDetail({
+    heroImage: `${DEV_IMG}Mushrif Village/mushrif-village-development-hero.jpg`,
+    location: "Mirdif",
+    types: "2–4 bedroom villas and townhouses",
+    units: "122 villas and townhouses",
+    price: "Sold out",
+    blurb: "A Rare Freehold Ownership Villa Community",
+    neighbourhoodParagraph: "Mirdif is a residential suburb in Dubai, known for its villa and townhouse communities.",
+  }),
+  "residence-110": minimalDetail({
+    heroImage: `${DEV_IMG}Residence 110/residence-110-development-hero.jpg`,
+    location: "Business Bay",
+    types: "Studio–3 bedrooms",
+    units: "110 residences",
+    price: "Sold out",
+    blurb: "Luxury Living In The Heart Of Business Bay",
+    neighbourhoodParagraph: BUSINESS_BAY_BLURB,
+  }),
+  "15-northside": minimalDetail({
+    heroImage: `${DEV_IMG}15 Northside/15-northside-development-hero.jpg`,
+    location: "Business Bay",
+    types: "Studio–4 bedrooms",
+    units: "349 residences",
+    price: "Sold out",
+    blurb: "Bringing The Select Group Standard To Business Bay",
+    neighbourhoodParagraph: BUSINESS_BAY_BLURB,
+  }),
+  "the-residences-at-marina-gate": minimalDetail({
+    heroImage: `${DEV_IMG}Marina Gate/marina-gate-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "1–4 bedrooms",
+    units: "950 residences across two towers",
+    price: "Sold out",
+    blurb: "Part of the three-tower gateway to Dubai Marina.",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "no-9": minimalDetail({
+    heroImage: `${DEV_IMG}No 9/no-9-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "1–3 bedrooms",
+    units: "227 residences",
+    price: "Sold out",
+    blurb: "A slender residential tower fronting the Dubai Marina promenade.",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
+  "studio-one": minimalDetail({
+    heroImage: `${DEV_IMG}Studio One/studio-one-development-hero.jpg`,
+    location: "Dubai Marina",
+    types: "Studio–2 bedrooms",
+    units: "404 residences",
+    price: "Sold out",
+    blurb: "Compact studio and one-bedroom living on the edge of Dubai Marina.",
+    neighbourhoodParagraph: MARINA_BLURB,
+  }),
 };

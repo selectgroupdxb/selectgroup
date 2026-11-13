@@ -11,9 +11,11 @@ type ProjectHeroProps = {
   development: Development;
   hero: DevelopmentDetail["hero"];
   gallery: GalleryItem[];
+  /** Where "Register Your Interest" points — "#register" only works when an EnquiryForm is on the page. */
+  registerHref?: string;
 };
 
-export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
+export function ProjectHero({ development, hero, gallery, registerHref = "#register" }: ProjectHeroProps) {
   return (
     <>
       <section id="hero" className="relative mt-16 flex h-[min(880px,86svh)] min-h-[420px] items-end overflow-hidden bg-sg-black desktop:mt-22">
@@ -61,7 +63,7 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
           ) : null}
           <p className="mt-5 max-w-[48ch] text-body-lg font-light text-white/82">{hero.heroSub}</p>
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <Button href="#register" variant="outline-inverse">
+            <Button href={registerHref} variant="outline-inverse">
               Register Your Interest
             </Button>
             {gallery.length > 0 ? <ProjectGallery items={gallery} /> : null}

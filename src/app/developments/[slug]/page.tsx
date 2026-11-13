@@ -60,12 +60,19 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
 
       {detail ? (
         <>
-          <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery ?? []} />
-          <ContentBlock block={detail.theTower} imageRight={false} noBottomPadding />
-          <KeyFacts facts={detail.keyFacts} id="key-facts" />
+          <ProjectHero
+            development={development}
+            hero={detail.hero}
+            gallery={detail.gallery ?? []}
+            registerHref={detail.minimal ? "/contact" : "#register"}
+          />
+          <ContentBlock block={detail.theTower} imageRight={false} noBottomPadding={Boolean(detail.keyFacts?.length)} />
+          {detail.keyFacts?.length ? <KeyFacts facts={detail.keyFacts} id="key-facts" /> : null}
           {detail.twoTowers ? <TwoTowers intro={detail.twoTowers.intro} towers={detail.twoTowers.towers} /> : null}
           <ContentBlock block={detail.theResidences} imageRight />
-          <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />
+          {detail.amenitiesIntro && detail.amenities?.length ? (
+            <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />
+          ) : null}
           {isBranded && detail.experience ? (
             <SixSensesExperience
               image={detail.experience.image}
@@ -93,16 +100,20 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
               quarters={detail.constructionProgress.quarters}
             />
           ) : null}
-          <EnquiryForm developmentName={development.name} image={detail.enquireImage} />
-          {detail.faq ? <ProjectFAQ items={detail.faq} /> : null}
-          <StickyEnquiryBar
-            name={development.name}
-            heroSub={detail.hero.heroSub}
-            priceLabel={detail.hero.priceLabel}
-            price={detail.hero.price}
-            priceNote={detail.hero.priceNote}
-            triggerId="hero"
-          />
+          {!detail.minimal ? (
+            <>
+              <EnquiryForm developmentName={development.name} image={detail.enquireImage} />
+              {detail.faq ? <ProjectFAQ items={detail.faq} /> : null}
+              <StickyEnquiryBar
+                name={development.name}
+                heroSub={detail.hero.heroSub}
+                priceLabel={detail.hero.priceLabel}
+                price={detail.hero.price}
+                priceNote={detail.hero.priceNote}
+                triggerId="hero"
+              />
+            </>
+          ) : null}
         </>
       ) : (
         <>

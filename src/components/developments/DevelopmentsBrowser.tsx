@@ -8,6 +8,39 @@ import { DevelopmentGridCard } from "./DevelopmentGridCard";
 import { FilterBar, BEDROOM_OPTIONS, type StatusFilter } from "./FilterBar";
 import { RecentlyViewed } from "./RecentlyViewed";
 
+// Real completion year per development (from the homepage's Past Developments
+// timeline — see pastDevelopments in data/homepage.ts), keyed by slug for a
+// reliable match. Used only to order the "Completed" developments newest
+// first, after the Off Plan ones; developments without a known year (there
+// shouldn't be any — every Completed entry has a real delivery year) sort to
+// the end rather than guessing.
+const COMPLETION_YEAR: Record<string, number> = {
+  "jumeirah-living-business-bay": 2026,
+  "peninsula-four-the-plaza": 2026,
+  "the-edge": 2026,
+  "peninsula-two": 2026,
+  "six-senses-residences-the-palm-dubai": 2026,
+  "nautica": 2026,
+  "peninsula-three": 2025,
+  "peninsula-one": 2025,
+  "15-northside": 2024,
+  "peninsula-five-the-signature-collection": 2024,
+  "jumeirah-living-marina-gate": 2020,
+  "studio-one": 2019,
+  "the-residences-at-marina-gate": 2019,
+  "residence-110": 2019,
+  "no-9": 2018,
+  "mushrif-village": 2018,
+  "pacific": 2017,
+  "west-avenue": 2014,
+  "bay-central": 2012,
+  "the-torch": 2011,
+  "botanica": 2010,
+  "the-royal-oceanic": 2009,
+  "the-point": 2008,
+  "yacht-bay": 2007,
+};
+
 export function DevelopmentsBrowser() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -86,6 +119,14 @@ export function DevelopmentsBrowser() {
       // compare, so they drop out rather than showing as a false match.
       if (searchMaxValue !== null && (d.priceFrom === undefined || d.priceFrom > searchMaxValue)) return false;
       return true;
+    }).sort((a, b) => {
+      // Off Plan first, then Completed/Branded newest-delivered first.
+      const aOffPlan = a.cats.includes("offplan") ? 0 : 1;
+      const bOffPlan = b.cats.includes("offplan") ? 0 : 1;
+      if (aOffPlan !== bOffPlan) return aOffPlan - bOffPlan;
+      const aYear = COMPLETION_YEAR[a.slug] ?? -Infinity;
+      const bYear = COMPLETION_YEAR[b.slug] ?? -Infinity;
+      return bYear - aYear;
     });
   }, [status, bedrooms, searchDevelopmentNames, searchMaxValue]);
 
