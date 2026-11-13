@@ -10,6 +10,7 @@ import { Amenities } from "@/components/developments/Amenities";
 import { TwoTowers } from "@/components/developments/TwoTowers";
 import { SixSensesExperience } from "@/components/developments/SixSensesExperience";
 import { Neighbourhood } from "@/components/developments/Neighbourhood";
+import { FiveDistricts } from "@/components/developments/FiveDistricts";
 import { ProjectLocation } from "@/components/developments/ProjectLocation";
 import { SelectDifference } from "@/components/developments/SelectDifference";
 import { ConstructionProgress } from "@/components/developments/ConstructionProgress";
@@ -80,6 +81,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
             stats={detail.neighbourhood.stats}
             image={detail.neighbourhood.image}
           />
+          {detail.fiveDistricts ? <FiveDistricts districts={detail.fiveDistricts} /> : null}
           {detail.location ? <ProjectLocation proximity={detail.location.proximity} mapNote={detail.location.mapNote} /> : null}
           <SelectDifference />
           {!isHandedOver && detail.constructionProgress ? (
@@ -99,7 +101,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
             priceLabel={detail.hero.priceLabel}
             price={detail.hero.price}
             priceNote={detail.hero.priceNote}
-            triggerId="key-facts"
+            triggerId="hero"
           />
         </>
       ) : (

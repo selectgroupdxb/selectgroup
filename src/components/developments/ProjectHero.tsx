@@ -16,7 +16,7 @@ type ProjectHeroProps = {
 export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
   return (
     <>
-      <section className="relative mt-16 flex h-[min(880px,86svh)] min-h-[420px] items-end overflow-hidden bg-sg-black desktop:mt-22">
+      <section id="hero" className="relative mt-16 flex h-[min(880px,86svh)] min-h-[420px] items-end overflow-hidden bg-sg-black desktop:mt-22">
         <ImagePlaceholder
           label={`${development.name} hero`}
           src={hero.image}
@@ -42,25 +42,23 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
         </div>
 
         <div className="relative w-full px-5 pb-16 tablet:px-10 desktop:px-16">
+          {hero.logo ? (
+            <Image
+              src={hero.logo}
+              alt={hero.brandName ?? development.name}
+              width={320}
+              height={170}
+              className="mb-1.5 ml-[-18px] h-[72px] w-auto object-contain tablet:h-[110px] desktop:ml-[-42px] desktop:h-[170px]"
+            />
+          ) : null}
           {hero.brandName ? (
-            <div>
-              {hero.logo ? (
-                <Image
-                  src={hero.logo}
-                  alt={hero.brandName}
-                  width={320}
-                  height={170}
-                  className="mb-1.5 ml-[-18px] h-[72px] w-auto object-contain tablet:h-[110px] desktop:ml-[-42px] desktop:h-[170px]"
-                />
-              ) : null}
-              <div className="flex items-baseline gap-4">
-                <p className="text-[clamp(32px,5vw,48px)] font-display tracking-heading text-white uppercase">{hero.brandName}</p>
-                <span className="text-[14px] font-light tracking-[0.3em] text-white/82 uppercase">{hero.brandSub}</span>
-              </div>
+            <div className="flex items-baseline gap-4">
+              <p className="text-[clamp(32px,5vw,48px)] font-display tracking-heading text-white uppercase">{hero.brandName}</p>
+              <span className="text-[14px] font-light tracking-[0.3em] text-white/82 uppercase">{hero.brandSub}</span>
             </div>
-          ) : (
+          ) : !hero.logo ? (
             <p className="max-w-[22ch] text-[clamp(36px,5.5vw,56px)] font-display tracking-heading text-white uppercase">{development.name}</p>
-          )}
+          ) : null}
           <p className="mt-5 max-w-[48ch] text-body-lg font-light text-white/82">{hero.heroSub}</p>
           <div className="mt-8 flex flex-wrap gap-3.5">
             <Button href="#register" variant="outline-inverse">

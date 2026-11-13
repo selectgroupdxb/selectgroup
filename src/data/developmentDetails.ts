@@ -104,6 +104,8 @@ export interface DevelopmentDetail {
     stats?: AreaStat[];
     image?: string;
   };
+  /** Only shown for Dubai Design District developments (e.g. Artistry). */
+  fiveDistricts?: { name: string; image?: string }[];
   /** Omitted where the source has no real proximity/map data yet. */
   location?: {
     proximity: ProximityPlace[];
@@ -334,8 +336,9 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
    */
   "artistry-residences": {
     hero: {
-      image: `${ART_IMG}artistry-residences-development-hero.jpg`,
+      image: `${ART_IMG}artistry-development-hero.jpg`,
       heroSub: "Dubai Design District",
+      logo: `${ART_IMG}Artistry Logo_Generic WHT.png`,
       price: "AED 2.3M",
       priceLabel: "Starting From",
       priceNote: "1–4 bed · 462 residences across Artistry One and Artistry Two",
@@ -352,6 +355,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theTower: {
       eyebrow: "The Tower",
       title: "A Landmark In Dubai Design District",
+      image: `${ART_IMG}artistry-landmark-in-d3.jpg`,
       paragraphs: [
         "Artistry One treats design as something you live in, not just look at. Generous layouts balance space and privacy, and every floor plan turns towards the view. The amenities cover wellness, leisure and work, so daily life rarely needs to leave the building.",
       ],
@@ -361,10 +365,12 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
       towers: [
         {
           name: "Artistry One",
+          image: `${ART_IMG}artistry-one-residences.jpg`,
           facts: [{ k: "Residences", v: "1–3 bedrooms, 4-bedroom duplex penthouses" }],
         },
         {
           name: "Artistry Two",
+          image: `${ART_IMG}artistry-two-residences.jpg`,
           facts: [
             { k: "Residences", v: "1–3 bedrooms" },
             { k: "Status", v: "Topped out, July 2026" },
@@ -376,6 +382,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     theResidences: {
       eyebrow: "The Residences",
       title: "One To Four-Bedroom Residences And Duplex Penthouses",
+      image: `${ART_IMG}artistry-the-residences-bedroom.jpg`,
       paragraphs: [
         "Choose from one, two and three-bedroom residences or four-bedroom duplex penthouses. Floor-to-ceiling glass frames the Burj Khalifa, the Downtown skyline and Dubai Canal. Warm natural materials and fluid layouts carry the Artistry character through every room.",
         "The duplex penthouses range from 4,638 to 7,765 sq. ft. Each has private terraces, a plunge pool and dual access points. Two signature residences add exclusive rooftop terraces with plunge pools.",
@@ -401,9 +408,33 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     ],
     neighbourhood: {
       title: "Dubai Design District",
+      image: `${ART_IMG}neighbourhood-dubai-design-district.jpg`,
       paragraphs: [
         "Dubai Design District, popularly called d3, is the city's home for design, fashion, art and innovation. Studios, galleries and cafés line walkable promenades along the canal. Living here puts Dubai's creative community on your doorstep.",
       ],
     },
+    // Real names and photos; body copy for each district is still
+    // [placeholder] in the source with no real text to extract, so the
+    // component shows name + image only. Alphabetical order per instruction.
+    fiveDistricts: [
+      { name: "Creekside", image: `${ART_IMG}d3-creekside.jpg` },
+      { name: "Design HQ", image: `${ART_IMG}d3-design-hq.jpg` },
+      { name: "Mindspace", image: `${ART_IMG}d3-mindspace.jpg` },
+      { name: "Nest", image: `${ART_IMG}d3-nest.jpg` },
+      { name: "Soho", image: `${ART_IMG}d3-soho.jpg` },
+    ],
+    gallery: [
+      { image: `${ART_IMG}artistry-gallery-entrance.jpg`, category: "amenities", caption: "Building entrance" },
+      { image: `${ART_IMG}artistry-gallery-lobby.jpg`, category: "amenities", caption: "Residents' lobby" },
+      { image: `${ART_IMG}artistry-gallery-lounge.jpg`, category: "amenities", caption: "Residents' lounge" },
+      { image: `${ART_IMG}artistry-gallery-pool-podium.jpg`, category: "amenities", caption: "Podium-level pool" },
+      { image: `${ART_IMG}artistry-gallery-pool-roof.jpg`, category: "amenities", caption: "Rooftop pool deck" },
+      { image: `${ART_IMG}artistry-gallery-bedroom-1.jpg`, category: "residences", caption: "Primary bedroom" },
+      { image: `${ART_IMG}artistry-gallery-bedroom-2.jpg`, category: "residences", caption: "Second bedroom" },
+      { image: `${ART_IMG}artistry-gallery-interior-1.jpg`, category: "residences", caption: "Living interior" },
+      { image: `${ART_IMG}artistry-gallery-interior-2.jpg`, category: "residences", caption: "Dining interior" },
+      { image: `${ART_IMG}artistry-gallery-interior-3.jpg`, category: "residences", caption: "Living and dining interior" },
+      { image: `${ART_IMG}artistry-gallery-balcony.jpg`, category: "residences", caption: "Private balcony" },
+    ],
   },
 };
