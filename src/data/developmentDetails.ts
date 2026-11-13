@@ -121,6 +121,7 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
     hero: {
       image: `${SSDM_IMG}six-senses-marina-development-hero.jpg`,
       heroSub: "Dubai Marina · The tallest residential tower in the world",
+      logo: `${SSDM_IMG}ssdm-logo-white.svg`,
       brandName: "Six Senses",
       brandSub: "RESIDENCES",
       price: "AED 5.8M",

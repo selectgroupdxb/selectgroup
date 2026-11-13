@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Button } from "@/components/ui/Button";
@@ -42,9 +43,20 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
 
         <div className="relative w-full px-5 pb-16 tablet:px-10 desktop:px-16">
           {hero.brandName ? (
-            <div className="flex items-baseline gap-4">
-              <p className="text-[clamp(32px,5vw,48px)] font-display tracking-heading text-white uppercase">{hero.brandName}</p>
-              <span className="text-[14px] font-light tracking-[0.3em] text-white/82 uppercase">{hero.brandSub}</span>
+            <div>
+              {hero.logo ? (
+                <Image
+                  src={hero.logo}
+                  alt={hero.brandName}
+                  width={320}
+                  height={170}
+                  className="mb-1.5 ml-[-18px] h-[72px] w-auto object-contain tablet:h-[110px] desktop:ml-[-42px] desktop:h-[170px]"
+                />
+              ) : null}
+              <div className="flex items-baseline gap-4">
+                <p className="text-[clamp(32px,5vw,48px)] font-display tracking-heading text-white uppercase">{hero.brandName}</p>
+                <span className="text-[14px] font-light tracking-[0.3em] text-white/82 uppercase">{hero.brandSub}</span>
+              </div>
             </div>
           ) : (
             <p className="max-w-[22ch] text-[clamp(36px,5.5vw,56px)] font-display tracking-heading text-white uppercase">{development.name}</p>
