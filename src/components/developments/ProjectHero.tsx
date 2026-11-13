@@ -63,9 +63,11 @@ export function ProjectHero({ development, hero, gallery, registerHref = "#regis
           ) : null}
           <p className="mt-5 max-w-[48ch] text-body-lg font-light text-white/82">{hero.heroSub}</p>
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <Button href={registerHref} variant="outline-inverse">
-              Register Your Interest
-            </Button>
+            {development.status !== "Completed" ? (
+              <Button href={registerHref} variant="outline-inverse">
+                Register Your Interest
+              </Button>
+            ) : null}
             {gallery.length > 0 ? <ProjectGallery items={gallery} /> : null}
           </div>
         </div>
