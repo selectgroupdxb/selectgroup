@@ -108,7 +108,7 @@ export interface DevelopmentDetail {
     image?: string;
   };
   /** Only shown for Dubai Design District developments (e.g. Artistry). */
-  fiveDistricts?: { name: string; image?: string }[];
+  fiveDistricts?: { name: string; image?: string; description?: string }[];
   /** Omitted where the source has no real proximity/map data yet. */
   location?: {
     proximity: ProximityPlace[];
@@ -490,15 +490,38 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
         "Dubai Design District, popularly called d3, is the city's home for design, fashion, art and innovation. Studios, galleries and cafés line walkable promenades along the canal. Living here puts Dubai's creative community on your doorstep.",
       ],
     },
-    // Real names and photos; body copy for each district is still
-    // [placeholder] in the source with no real text to extract, so the
-    // component shows name + image only. Alphabetical order per instruction.
+    // Real names, photos and descriptions supplied directly by the project
+    // owner (the source's own body copy for these was unconfirmed
+    // placeholder text). "Sanctuary" — the owner's name for this district —
+    // matches the source's "The Sanctuary", confirming the image filename
+    // "d3-nest.jpg" was a working title, not the real district name.
+    // Alphabetical order per instruction.
     fiveDistricts: [
-      { name: "Creekside", image: `${ART_IMG}d3-creekside.jpg` },
-      { name: "Design HQ", image: `${ART_IMG}d3-design-hq.jpg` },
-      { name: "Mindspace", image: `${ART_IMG}d3-mindspace.jpg` },
-      { name: "Nest", image: `${ART_IMG}d3-nest.jpg` },
-      { name: "Soho", image: `${ART_IMG}d3-soho.jpg` },
+      {
+        name: "Creekside",
+        image: `${ART_IMG}d3-creekside.jpg`,
+        description: "Flagship waterfront district with marina promenades and skyline views.",
+      },
+      {
+        name: "Design HQ",
+        image: `${ART_IMG}d3-design-hq.jpg`,
+        description: "The creative and commercial anchor where fashion, art and creativity shape work and daily life.",
+      },
+      {
+        name: "Mindspace",
+        image: `${ART_IMG}d3-mindspace.jpg`,
+        description: "Dedicated to creative production, experimentation and learning.",
+      },
+      {
+        name: "Sanctuary",
+        image: `${ART_IMG}d3-nest.jpg`,
+        description: "Green, restorative district, shaped by landscape, wellness and community.",
+      },
+      {
+        name: "Soho",
+        image: `${ART_IMG}d3-soho.jpg`,
+        description: "The social and cultural heart of d3, a lively urban neighbourhood, shaped by dining, culture and everyday interaction.",
+      },
     ],
     gallery: [
       { image: `${ART_IMG}artistry-gallery-entrance.jpg`, category: "amenities", caption: "Building entrance" },
