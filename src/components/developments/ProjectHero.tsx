@@ -35,7 +35,7 @@ export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Developments", href: "/developments" }, { label: development.name }]} />
         </div>
 
-        <div className="absolute top-[140px] right-5 hidden max-w-[330px] border border-white/34 bg-black/42 px-8 py-7 text-right backdrop-blur-md tablet:right-10 tablet:block desktop:right-16">
+        <div className="absolute top-[140px] right-5 hidden max-w-[460px] border border-white/34 bg-black/42 px-8 py-7 text-right backdrop-blur-md tablet:right-10 tablet:block desktop:right-16">
           <p className="text-[10px] font-bold tracking-[0.2em] text-white/78 uppercase">{hero.priceLabel}</p>
           <p className="mt-[18px] text-[40px] leading-none font-display tracking-[0.02em] text-white tablet:text-[48px] desktop:text-[56px]">{hero.price}</p>
           <p className="mt-[18px] border-t border-white/28 pt-4 text-[12px] font-light text-white/70">{hero.priceNote}</p>
