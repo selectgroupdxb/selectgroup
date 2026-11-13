@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProjectGallery } from "./ProjectGallery";
 import type { Development } from "@/data/homepage";
-import type { DevelopmentDetail } from "@/data/developmentDetails";
+import type { DevelopmentDetail, GalleryItem } from "@/data/developmentDetails";
 
 type ProjectHeroProps = {
   development: Development;
   hero: DevelopmentDetail["hero"];
-  gallery: DevelopmentDetail["gallery"];
+  gallery: GalleryItem[];
 };
 
 export function ProjectHero({ development, hero, gallery }: ProjectHeroProps) {

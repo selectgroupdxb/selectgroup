@@ -7,6 +7,7 @@ import { ProjectHero } from "@/components/developments/ProjectHero";
 import { KeyFacts } from "@/components/developments/KeyFacts";
 import { ContentBlock } from "@/components/developments/ContentBlock";
 import { Amenities } from "@/components/developments/Amenities";
+import { TwoTowers } from "@/components/developments/TwoTowers";
 import { SixSensesExperience } from "@/components/developments/SixSensesExperience";
 import { Neighbourhood } from "@/components/developments/Neighbourhood";
 import { ProjectLocation } from "@/components/developments/ProjectLocation";
@@ -58,9 +59,10 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
 
       {detail ? (
         <>
-          <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery} />
+          <ProjectHero development={development} hero={detail.hero} gallery={detail.gallery ?? []} />
           <ContentBlock block={detail.theTower} imageRight={false} noBottomPadding />
           <KeyFacts facts={detail.keyFacts} id="key-facts" />
+          {detail.twoTowers ? <TwoTowers intro={detail.twoTowers.intro} towers={detail.twoTowers.towers} /> : null}
           <ContentBlock block={detail.theResidences} imageRight />
           <Amenities title={detail.amenitiesIntro.title} body={detail.amenitiesIntro.body} items={detail.amenities} />
           {isBranded && detail.experience ? (
@@ -78,7 +80,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
             stats={detail.neighbourhood.stats}
             image={detail.neighbourhood.image}
           />
-          <ProjectLocation proximity={detail.location.proximity} mapNote={detail.location.mapNote} />
+          {detail.location ? <ProjectLocation proximity={detail.location.proximity} mapNote={detail.location.mapNote} /> : null}
           <SelectDifference />
           {!isHandedOver && detail.constructionProgress ? (
             <ConstructionProgress
@@ -90,7 +92,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
             />
           ) : null}
           <EnquiryForm developmentName={development.name} image={detail.enquireImage} />
-          <ProjectFAQ items={detail.faq} />
+          {detail.faq ? <ProjectFAQ items={detail.faq} /> : null}
           <StickyEnquiryBar
             name={development.name}
             heroSub={detail.hero.heroSub}

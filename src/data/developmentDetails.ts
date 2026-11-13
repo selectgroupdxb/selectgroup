@@ -25,6 +25,7 @@
 
 const IMG = "/images/homepage/";
 const SSDM_IMG = "/images/developments/Six Senses Dubai Marina/";
+const ART_IMG = "/images/developments/Artistry Residences/";
 
 export type TwoColBlock = {
   eyebrow: string;
@@ -67,6 +68,8 @@ export type ProjectFAQItem = {
   bullets?: string[];
 };
 
+export type Tower = { name: string; image?: string; facts: { k: string; v: string }[] };
+
 export interface DevelopmentDetail {
   hero: {
     image?: string;
@@ -82,6 +85,8 @@ export interface DevelopmentDetail {
   };
   keyFacts: KeyFact[];
   theTower: TwoColBlock;
+  /** Only shown for multi-tower developments (e.g. Artistry One/Two combined into one listing). */
+  twoTowers?: { intro: string; towers: Tower[] };
   theResidences: TwoColBlock;
   amenitiesIntro: { title: string; body: string };
   amenities: AmenityItem[];
@@ -96,10 +101,11 @@ export interface DevelopmentDetail {
   neighbourhood: {
     title: string;
     paragraphs: string[];
-    stats: AreaStat[];
+    stats?: AreaStat[];
     image?: string;
   };
-  location: {
+  /** Omitted where the source has no real proximity/map data yet. */
+  location?: {
     proximity: ProximityPlace[];
     mapNote: string;
   };
@@ -112,8 +118,10 @@ export interface DevelopmentDetail {
     quarters: ConstructionQuarter[];
   };
   enquireImage?: string;
-  gallery: GalleryItem[];
-  faq: ProjectFAQItem[];
+  /** Omitted where the source has no real gallery photos yet (just a single placeholder item). */
+  gallery?: GalleryItem[];
+  /** Omitted where the source's FAQ answers are all placeholder text. */
+  faq?: ProjectFAQItem[];
 }
 
 export const developmentDetails: Record<string, DevelopmentDetail> = {
@@ -312,5 +320,90 @@ export const developmentDetails: Record<string, DevelopmentDetail> = {
         answer: "The estimated service charge is approximately AED 34 - AED 38 per sq.ft.",
       },
     ],
+  },
+  /**
+   * The prototype only overrides Artistry Residences' hero image — everything
+   * else falls back to its generic per-project template, which in turn has
+   * Artistry-specific real copy hardcoded into several of its branches (the
+   * tower/residences paragraphs, the amenities list and its title, the "Two
+   * Towers" section, and the district paragraph), matched by name regex
+   * rather than a named override. That real content is extracted here;
+   * sections where even the generic fallback is pure `[placeholder]` text
+   * (Location & Connectivity, Construction Progress, FAQ, Gallery, Five
+   * Districts) are omitted rather than shipped with invented copy.
+   */
+  "artistry-residences": {
+    hero: {
+      image: `${ART_IMG}artistry-residences-development-hero.jpg`,
+      heroSub: "Dubai Design District",
+      price: "AED 2.3M",
+      priceLabel: "Starting From",
+      priceNote: "1–4 bed · 462 residences across Artistry One and Artistry Two",
+      introEyebrow: "Dubai Design District",
+      introBody: "Two residential towers in Dubai Design District, Artistry One and Artistry Two.",
+    },
+    keyFacts: [
+      { label: "Starting From", value: "AED 2.3M" },
+      { label: "Payment Plan", value: "50/50" },
+      { label: "Handover", value: "2027–2029" },
+      { label: "Unit Mix", value: "1–4 Bed" },
+      { label: "Residences", value: "462 across two towers" },
+    ],
+    theTower: {
+      eyebrow: "The Tower",
+      title: "A Landmark In Dubai Design District",
+      paragraphs: [
+        "Artistry One treats design as something you live in, not just look at. Generous layouts balance space and privacy, and every floor plan turns towards the view. The amenities cover wellness, leisure and work, so daily life rarely needs to leave the building.",
+      ],
+    },
+    twoTowers: {
+      intro: "Artistry Residences comprises two residential towers in Dubai Design District, Artistry One and Artistry Two.",
+      towers: [
+        {
+          name: "Artistry One",
+          facts: [{ k: "Residences", v: "1–3 bedrooms, 4-bedroom duplex penthouses" }],
+        },
+        {
+          name: "Artistry Two",
+          facts: [
+            { k: "Residences", v: "1–3 bedrooms" },
+            { k: "Status", v: "Topped out, July 2026" },
+            { k: "Handover", v: "2027" },
+          ],
+        },
+      ],
+    },
+    theResidences: {
+      eyebrow: "The Residences",
+      title: "One To Four-Bedroom Residences And Duplex Penthouses",
+      paragraphs: [
+        "Choose from one, two and three-bedroom residences or four-bedroom duplex penthouses. Floor-to-ceiling glass frames the Burj Khalifa, the Downtown skyline and Dubai Canal. Warm natural materials and fluid layouts carry the Artistry character through every room.",
+        "The duplex penthouses range from 4,638 to 7,765 sq. ft. Each has private terraces, a plunge pool and dual access points. Two signature residences add exclusive rooftop terraces with plunge pools.",
+      ],
+    },
+    amenitiesIntro: {
+      title: "Everything For Wellness, Leisure And Work, A Lift Ride From Home",
+      body: "",
+    },
+    amenities: [
+      { label: "Infinity lap pool", level: "Level 21 (A1) / Level 22 (A2)" },
+      { label: "Sun decks", level: "" },
+      { label: "Fully equipped gym", level: "" },
+      { label: "Training studio for yoga and pilates", level: "" },
+      { label: "Padel courts", level: "" },
+      { label: "Sauna", level: "" },
+      { label: "Steam room", level: "" },
+      { label: "Ice baths", level: "" },
+      { label: "Resident lounges", level: "" },
+      { label: "Co-working spaces", level: "" },
+      { label: "Family leisure zones", level: "" },
+      { label: "Private terraces with plunge pools", level: "" },
+    ],
+    neighbourhood: {
+      title: "Dubai Design District",
+      paragraphs: [
+        "Dubai Design District, popularly called d3, is the city's home for design, fashion, art and innovation. Studios, galleries and cafés line walkable promenades along the canal. Living here puts Dubai's creative community on your doorstep.",
+      ],
+    },
   },
 };

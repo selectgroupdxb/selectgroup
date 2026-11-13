@@ -6,7 +6,7 @@ import type { AreaStat } from "@/data/developmentDetails";
 type NeighbourhoodProps = {
   title: string;
   paragraphs: string[];
-  stats: AreaStat[];
+  stats?: AreaStat[];
   image?: string;
 };
 
@@ -23,14 +23,16 @@ export function Neighbourhood({ title, paragraphs, stats, image }: Neighbourhood
               {p}
             </p>
           ))}
-          <div className="mt-8 grid grid-cols-3 gap-6 border-t border-sg-grey-4 pt-6">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="text-h3 text-sg-black">{stat.value}</p>
-                <p className="mt-1 text-body-sm text-sg-grey-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          {stats && stats.length > 0 ? (
+            <div className="mt-8 grid grid-cols-3 gap-6 border-t border-sg-grey-4 pt-6">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-h3 text-sg-black">{stat.value}</p>
+                  <p className="mt-1 text-body-sm text-sg-grey-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </Section>
