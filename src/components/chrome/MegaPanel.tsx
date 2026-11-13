@@ -92,12 +92,7 @@ export function MegaPanel({ group, open, id }: MegaPanelProps) {
       )}
     >
       <div className="overflow-hidden">
-        <div
-          className={cn(
-            "border-t border-sg-grey-5 bg-white shadow-modal transition-opacity duration-320",
-            open ? "opacity-100 delay-150" : "opacity-0",
-          )}
-        >
+        <div className="border-t border-sg-grey-5 bg-white shadow-modal">
           <div className="grid gap-16 px-16 pt-11 pb-[52px]" style={{ gridTemplateColumns: "320px 1fr" }}>
             <div className="flex flex-col">
               <p className="mb-[22px] text-eyebrow font-bold tracking-eyebrow text-sg-grey-2 uppercase">{group.eyebrow}</p>
