@@ -107,7 +107,7 @@ export default async function DevelopmentPage({ params }: { params: Promise<{ sl
             hero={{
               image: development.image,
               heroSub: `${development.location} · ${development.types}`,
-              price: development.price,
+              price: development.price.replace(/^From\s+/i, ""),
               priceLabel: "Starting From",
               priceNote: development.units,
               introEyebrow: development.location,
