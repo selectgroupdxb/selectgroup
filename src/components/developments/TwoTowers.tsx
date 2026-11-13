@@ -5,7 +5,7 @@ import type { Tower } from "@/data/developmentDetails";
 
 export function TwoTowers({ intro, towers }: { intro: string; towers: Tower[] }) {
   return (
-    <Section tone="white" padding="none" className="pt-18 tablet:pt-24 desktop:pt-28">
+    <Section tone="white" padding="none" className="py-18 tablet:py-24 desktop:py-28">
       <div className="mx-auto max-w-[720px] text-center">
         <Eyebrow>Two Towers</Eyebrow>
         <h2 className="mt-3 text-h2 text-sg-black">Artistry One And Artistry Two</h2>

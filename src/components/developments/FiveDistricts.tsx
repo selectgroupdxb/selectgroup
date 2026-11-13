@@ -18,7 +18,7 @@ export function FiveDistricts({ districts }: { districts: District[] }) {
   }
 
   return (
-    <Section tone="white" padding="none" className="pb-18 tablet:pb-24 desktop:pb-28">
+    <Section tone="white" padding="none" className="py-18 tablet:py-24 desktop:py-28">
       <div className="grid gap-10 desktop:grid-cols-2 desktop:items-stretch desktop:gap-18">
         <div className="flex flex-col justify-center">
           <Eyebrow>Dubai Design District</Eyebrow>
