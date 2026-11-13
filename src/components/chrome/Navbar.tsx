@@ -34,7 +34,7 @@ export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const solid = scrolled || !hasTransparentHero;
+  const solid = scrolled || !hasTransparentHero || openPanel !== null;
 
   useEffect(() => {
     function onScroll() {
