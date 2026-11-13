@@ -163,7 +163,7 @@ export function FeaturedDevelopments() {
               aria-selected={tab === t.key}
               onClick={() => { setTab(t.key); setPage(0); }}
               className={cn(
-                "min-h-11 shrink-0 rounded-pill px-5 py-2 text-chip font-bold tracking-chip uppercase transition-colors duration-180",
+                "min-h-11 shrink-0 cursor-pointer rounded-pill px-5 py-2 text-chip font-bold tracking-chip uppercase transition-colors duration-180",
                 tab === t.key ? "bg-sg-black text-white" : "border border-sg-grey-4 text-sg-grey-1",
               )}
             >
